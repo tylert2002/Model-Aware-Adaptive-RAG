@@ -47,7 +47,9 @@ The runner reuses `build_decomposer_and_models` and `load_reader` from `commaqa.
 
 For evaluation, HotpotQA, 2WikiMultiHopQA, and MuSiQue use the upstream `DropAnswerEmAndF1`; NQ, TriviaQA, and SQuAD use `SquadAnswerEmF1Metric`. This preserves the original dataset-specific numeric and multi-span handling rather than forcing one metric across all datasets.
 
-The only generation-backend substitution is the injected NRP object. The upstream graph still constructs prompts and C still uses the upstream spaCy sentence segmentation and exit rules. The NRP bridge carries the current GPT-config decoding defaults (`max_tokens=300`, temperature 0, top-p 1, newline stop, thinking disabled). It does not run the legacy GPT-2 tokenizer-based prompt-fitting step because that would require a local tokenizer/model download; prompt text produced by the upstream participants is sent directly to NRP. This backend difference must be recorded and means the pilot is a compatibility study, not an exact reproduction of GPT or FLAN-T5 outputs.
+The only generation-backend substitution is the injected NRP object. The upstream graph still constructs prompts and C still uses the upstream spaCy sentence segmentation and exit rules. At the adapter boundary, the bridge now reuses the unchanged upstream `fit_prompt_into_given_limit` function with the original GPT settings: a 3,500-token model limit, 300 reserved generation tokens, `\n\n\n` demonstration delimiter, `remove_method="first"`, GPT-2 tokenization, and the last segment retained as the test example. The tokenizer is loaded with `local_files_only=True`; missing `transformers` or uncached GPT-2 tokenizer assets fail preflight instead of skipping truncation or downloading files. No GPT-2 model weights are needed.
+
+GPT-2 token counts are a compatibility rule inherited from the original GPT generator, not Gemma-native context accounting. NRP applies Gemma chat formatting and Gemma tokenization after receiving the fitted prompt, so its reported input-token count can differ and remains the authoritative usage measurement. This backend difference means the pilot is a compatibility study, not an exact reproduction of GPT or FLAN-T5 outputs.
 
 ## Environment and secure setup
 
@@ -102,16 +104,31 @@ python -m research.experiments.pilot.run \
 
 Only `--execute` loads `research/experiments/pilot/.env` and permits inference. A real run processes the same deterministically selected question IDs through A, B, and C sequentially. Each run receives a unique timestamp/UUID directory under `research/results/pilot/`; existing artifacts are never overwritten. `run_metadata.json` records configuration and provenance, `results.jsonl` stores one question/strategy record, and `traces/` stores sanitized request accounting. Credentials and authorization headers are never written.
 
-The default pilot input is `adaptive-rag/processed_data/<dataset>/dev_subsampled.jsonl`, deliberately not the final held-out test file. Before formal work, freeze the selected pilot IDs and ensure they are excluded from every final test split.
+## Offline end-to-end validation
+
+The isolated runtime is `.venv-pilot` (CPython 3.9), with exact versions in `research/config/pilot-runtime-py39.lock.txt`. GPT-2 tokenizer assets live only in the ignored `.pilot-cache` directory; no GPT-2 model weights are used. The offline validator refuses to run unless Elasticsearch on `127.0.0.1:9200` contains exactly 5,233,329 documents in the `hotpotqa` index and the original retriever answers on `127.0.0.1:8000`.
+
+Once those upstream services are ready, repeat the validation from the repository root with:
+
+```sh
+.venv-pilot/bin/python -m research.experiments.pilot.offline_validation --seed 100 --execute
+```
+
+This command never reads `.env`, accepts only the `offline-mock` generator, and makes no NRP request. It deterministically exercises A, B, two retrieval/reasoning transitions in C, and C's original final-answer path. Outputs are written without overwrite under `research/results/pilot/offline_validation/` and marked `OFFLINE MOCK VALIDATION — NOT RESEARCH RESULTS`.
+
+The required corpus is the official HotpotQA introductory-paragraph archive `enwiki-20171001-pages-meta-current-withlinks-abstracts.tar.bz2`: 1,553,565,403 bytes compressed, MD5 `01edf64cd120ecc03a2745352779514c`, CC BY-SA 4.0. Do not substitute another Wikipedia snapshot or retrieval implementation.
+
+The default HotpotQA pilot input is the archive's original `adaptive-rag/processed_data/hotpotqa/dev_500_subsampled.jsonl`; other datasets retain `adaptive-rag/processed_data/<dataset>/dev_subsampled.jsonl`. These are deliberately not final held-out test files. `--dataset-path PATH` provides an explicit override for future frozen splits without renaming upstream data. Missing paths fail with the exact expected location. Before formal work, freeze the selected pilot IDs and ensure they are excluded from every final test split.
 
 ## Required local resources and remaining work
 
 Faithful execution requires:
 
 - the original Python dependencies in `adaptive-rag/requirements.txt`, including Jsonnet, spaCy, the local `en_core_web_sm` package, retrieval dependencies, and metric dependencies;
-- `processed_data/<dataset>/dev_subsampled.jsonl` in the upstream tree;
+- `processed_data/hotpotqa/dev_500_subsampled.jsonl` for HotpotQA, or the configured processed development JSONL for another dataset;
 - the original prompts and all three GPT strategy configs for the selected dataset;
 - `.retriever_address.jsonnet`, a running upstream retriever service, and the matching Elasticsearch corpus/index (`hotpotqa`, `2wikimultihopqa`, `musique`, or `wiki` for NQ/TriviaQA/SQuAD);
+- a locally cached GPT-2 tokenizer plus `transformers` for the original prompt-fitting rule (no GPT-2 weights);
 - the ignored `.env` file only when `--execute` is intentionally used.
 
 This checkout currently lacks the processed datasets and several upstream Python dependencies, so real end-to-end execution has not been verified. The offline tests use mock responses and synthetic temporary records solely to verify software behavior; they are not research results. After resources are installed without changing upstream algorithms, run dry-run again, confirm the retriever/index, review the frozen IDs and decoding configuration, and request explicit approval before the first one-question execution.

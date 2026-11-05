@@ -17,7 +17,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Iterable, Mapping, Protocol
 
-from .adaptive_rag_bridge import AdaptiveRAGNRPGenerator
+from .adaptive_rag_bridge import AdaptiveRAGNRPGenerator, load_local_gpt2_tokenizer
 from .nrp_adapter import NRPChatAdapter, NRPConfigurationError, NRPRequestError
 
 
@@ -32,6 +32,11 @@ SUPPORTED_DATASETS = (
 RESOLVED_MODEL_IDS = {
     "gemma-small": "google/gemma-4-12B-it-qat-w4a16-ct",
     "gemma": "google/gemma-4-31B-it-qat-w4a16-ct",
+    "offline-mock": "offline/mock-deterministic-v1",
+}
+DEFAULT_DATASET_FILENAMES = {
+    "hotpotqa": "dev_500_subsampled.jsonl",
+    "squad": "dev_500_subsampled.jsonl",
 }
 
 
@@ -94,12 +99,13 @@ class PilotPaths:
     results_root: Path
 
 
-def default_paths(repo_root: Path, dataset: str) -> PilotPaths:
+def default_paths(repo_root: Path, dataset: str, dataset_path: Path | None = None) -> PilotPaths:
     upstream = repo_root / "adaptive-rag"
+    default_filename = DEFAULT_DATASET_FILENAMES.get(dataset, "dev_subsampled.jsonl")
     return PilotPaths(
         repo_root=repo_root,
         upstream_root=upstream,
-        dataset_path=upstream / "processed_data" / dataset / "dev_subsampled.jsonl",
+        dataset_path=dataset_path or upstream / "processed_data" / dataset / default_filename,
         retriever_address_path=upstream / ".retriever_address.jsonnet",
         results_root=repo_root / "research" / "results" / "pilot",
     )
@@ -137,6 +143,13 @@ def validate_resources(paths: PilotPaths, dataset: str, *, check_dependencies: b
                     errors.append("missing local spaCy checkpoint: en_core_web_sm (required by strategy C)")
             except Exception as error:  # pragma: no cover - dependency-specific
                 errors.append(f"could not validate spaCy checkpoint: {error.__class__.__name__}")
+        if importlib.util.find_spec("transformers") is None:
+            errors.append("missing upstream Python dependency: transformers (required for GPT-2 prompt truncation)")
+        else:
+            try:
+                load_local_gpt2_tokenizer()
+            except RuntimeError as error:
+                errors.append(str(error))
     if errors:
         raise ResourceValidationError("\n".join(f"- {error}" for error in errors))
     return [str(paths.dataset_path), str(paths.retriever_address_path), str(prompt_dir)]
@@ -370,6 +383,42 @@ def display_path(path: Path, repo_root: Path) -> str:
         return str(path)
 
 
+@contextlib.contextmanager
+def capture_retrieval_trace(output_path: Path):
+    """Record only localhost retriever requests and responses for one strategy."""
+    import requests
+
+    original_post = requests.post
+    records: list[dict[str, Any]] = []
+
+    def traced_post(url: str, *args: Any, **kwargs: Any):
+        started = time.perf_counter()
+        response = original_post(url, *args, **kwargs)
+        if url.startswith(("http://localhost:8000/", "http://127.0.0.1:8000/")):
+            record: dict[str, Any] = {
+                "url": url,
+                "request": kwargs.get("json"),
+                "http_status": response.status_code,
+                "latency_seconds": time.perf_counter() - started,
+            }
+            try:
+                record["response"] = response.json()
+            except ValueError:
+                record["response_error"] = "invalid_json"
+            records.append(record)
+        return response
+
+    requests.post = traced_post
+    try:
+        yield records
+    finally:
+        requests.post = original_post
+        output_path.write_text(
+            "".join(json.dumps(record, ensure_ascii=False) + "\n" for record in records),
+            encoding="utf-8",
+        )
+
+
 def run_pilot(
     *,
     paths: PilotPaths,
@@ -431,6 +480,7 @@ def run_pilot(
                 example = example_maps[spec.code][question_id]
                 safe_qid = hashlib.sha256(question_id.encode()).hexdigest()[:16]
                 trace_path = traces_dir / f"{safe_qid}_{spec.code}.jsonl"
+                retrieval_trace_path = traces_dir / f"{safe_qid}_{spec.code}_retrieval.jsonl"
                 generator = AdaptiveRAGNRPGenerator(
                     adapter,
                     model=model,
@@ -448,7 +498,8 @@ def run_pilot(
                 status = "complete"
                 error_category = None
                 try:
-                    answer, chain, retrieval_calls = backend.execute(example, generator)
+                    with capture_retrieval_trace(retrieval_trace_path):
+                        answer, chain, retrieval_calls = backend.execute(example, generator)
                     f1, exact_match = score_answer(dataset, answer, example["answer"])
                 except NRPRequestError as error:
                     retrieval_calls = int(getattr(backend, "last_retrieval_calls", retrieval_calls))
@@ -479,6 +530,7 @@ def run_pilot(
                     "completion_status": status,
                     "error_category": error_category,
                     "trace_file": str(trace_path.relative_to(run_dir)),
+                    "retrieval_trace_file": str(retrieval_trace_path.relative_to(run_dir)),
                     "reasoning_chain": chain,
                 }
                 append_jsonl(output_path, row)

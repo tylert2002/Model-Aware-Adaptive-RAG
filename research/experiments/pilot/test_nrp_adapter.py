@@ -68,6 +68,17 @@ class NRPAdapterTests(unittest.TestCase):
             adapter.generate("hello", model="gemma")
         self.assertEqual(context.exception.category, "invalid_response")
 
+    def test_preserves_sanitized_http_diagnostic_without_secret(self):
+        secret = "sensitive-test-key"
+        config = NRPConfig(api_key=secret, max_retries=0)
+        body = json.dumps({"error": {"message": f"model forbidden for {secret}"}}).encode()
+        adapter = NRPChatAdapter(config, transport=lambda request, timeout: (403, {}, body))
+        with self.assertRaises(NRPRequestError) as context:
+            adapter.generate("hello", model="gemma-small")
+        self.assertEqual(context.exception.status_code, 403)
+        self.assertEqual(context.exception.diagnostic, "model forbidden for [REDACTED]")
+        self.assertNotIn(secret, str(context.exception.diagnostic))
+
     def test_rejects_unlisted_model_instead_of_falling_back(self):
         adapter = NRPChatAdapter(self.config, transport=lambda request, timeout: (200, {}, b"{}"))
         with self.assertRaises(NRPConfigurationError):

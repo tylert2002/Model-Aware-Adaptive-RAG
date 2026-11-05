@@ -31,10 +31,18 @@ class NRPConfigurationError(ValueError):
 class NRPRequestError(RuntimeError):
     """A sanitized request failure that never includes authorization headers."""
 
-    def __init__(self, category: str, *, status_code: int | None = None, retryable: bool = False):
+    def __init__(
+        self,
+        category: str,
+        *,
+        status_code: int | None = None,
+        retryable: bool = False,
+        diagnostic: str | None = None,
+    ):
         self.category = category
         self.status_code = status_code
         self.retryable = retryable
+        self.diagnostic = diagnostic
         status = f" (HTTP {status_code})" if status_code is not None else ""
         super().__init__(f"NRP request failed: {category}{status}")
 
@@ -176,6 +184,7 @@ class NRPChatAdapter:
                         "http_error",
                         status_code=status_code,
                         retryable=status_code in TRANSIENT_HTTP_STATUSES,
+                        diagnostic=_sanitize_error_detail(response_body, self.config.api_key),
                     )
                 parsed = _parse_chat_completion(response_body)
                 latency = self._clock() - started
@@ -198,10 +207,15 @@ class NRPChatAdapter:
             except (TimeoutError, socket.timeout):
                 last_error = NRPRequestError("timeout", retryable=True)
             except urllib.error.HTTPError as error:
+                try:
+                    error_body = error.read(4096)
+                except Exception:
+                    error_body = b""
                 last_error = NRPRequestError(
                     "http_error",
                     status_code=error.code,
                     retryable=error.code in TRANSIENT_HTTP_STATUSES,
+                    diagnostic=_sanitize_error_detail(error_body, self.config.api_key),
                 )
             except urllib.error.URLError:
                 last_error = NRPRequestError("network_error", retryable=True)
@@ -244,6 +258,30 @@ def _header_value(headers: Mapping[str, str], name: str) -> str | None:
         if key.lower() == target:
             return value
     return None
+
+
+def _sanitize_error_detail(body: bytes, secret: str) -> str | None:
+    """Extract a bounded server diagnostic without retaining credentials or raw bodies."""
+    if not body:
+        return None
+    try:
+        parsed = json.loads(body.decode("utf-8", errors="replace"))
+    except json.JSONDecodeError:
+        value = body.decode("utf-8", errors="replace")
+    else:
+        value: Any = parsed
+        if isinstance(parsed, dict):
+            error = parsed.get("error")
+            if isinstance(error, dict):
+                value = error.get("message") or error.get("detail") or error.get("type") or ""
+            else:
+                value = error or parsed.get("message") or parsed.get("detail") or ""
+        if not isinstance(value, str):
+            value = ""
+    value = " ".join(value.split())[:500]
+    if secret:
+        value = value.replace(secret, "[REDACTED]")
+    return value or None
 
 
 def _optional_int(value: Any) -> int | None:

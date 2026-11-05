@@ -286,17 +286,28 @@ The reused upstream boundaries are:
 
 `run.py` requires exactly one of `--dry-run` or `--execute`. Dry-run does not
 load `.env`; execute loads it only inside the runner process. Deterministic
-pilot IDs come from `processed_data/<dataset>/dev_subsampled.jsonl`. Unique run
+HotpotQA pilot IDs come from the upstream archive filename
+`processed_data/hotpotqa/dev_500_subsampled.jsonl`; the configurable
+`--dataset-path` option supports future frozen splits without renaming upstream
+files. Missing files report the exact resolved path. Unique run
 directories under `research/results/pilot/` contain `run_metadata.json`,
 `results.jsonl`, and per-question/per-strategy request traces. No existing run
 directory is overwritten.
 
-The upstream GPT generator normally performs GPT-2-tokenizer prompt fitting.
-The NRP bridge receives the prompt built by the upstream participant directly
-and therefore does not reproduce that model-specific fitting step or require a
-local tokenizer download. Current GPT-config decoding defaults and the upstream
-strategy graph are retained. This difference, plus hosted chat formatting and
-quantization, prevents claims of exact GPT/FLAN-T5 reproduction.
+The NRP bridge now restores the upstream GPT generator's second prompt-fitting
+step by calling the original `fit_prompt_into_given_limit` implementation at
+the adapter boundary. It preserves the original `rstrip`, 3,500-token limit,
+300-token generation allowance, triple-newline delimiter, first-demonstration
+removal, GPT-2 tokenizer, and last-test-example settings. GPT-2 tokenizer assets
+must already be cached locally and are loaded cache-only; missing assets or
+`transformers` fail preflight rather than downloading or silently bypassing the
+step. GPT-2 model weights are not required.
+
+GPT-2 fitting is preserved for compatibility, but GPT-2 token counts are not
+Gemma token counts. NRP subsequently applies hosted Gemma chat formatting and
+tokenization, so response usage may report a different input-token count. Chat
+formatting, hosted quantization, and model differences still prevent claims of
+exact GPT/FLAN-T5 reproduction.
 
 Real execution is presently blocked in this checkout by absent processed
 datasets, Elasticsearch corpora/indexes, several packages from the upstream

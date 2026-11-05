@@ -3,9 +3,16 @@
 from __future__ import annotations
 
 import argparse
+import json
 import os
 import sys
 from pathlib import Path
+
+REPO_ROOT = Path(__file__).resolve().parents[3]
+os.environ.setdefault("HF_HOME", str(REPO_ROOT / ".pilot-cache" / "huggingface"))
+os.environ.setdefault("TRANSFORMERS_CACHE", str(REPO_ROOT / ".pilot-cache" / "huggingface" / "transformers"))
+os.environ.setdefault("TRANSFORMERS_OFFLINE", "1")
+os.environ.setdefault("HF_HUB_OFFLINE", "1")
 
 from .nrp_adapter import NRPChatAdapter, NRPConfig, NRPConfigurationError, SUPPORTED_PILOT_MODELS
 from .pipeline import (
@@ -24,6 +31,11 @@ def parser() -> argparse.ArgumentParser:
     result.add_argument("--dataset", required=True, choices=SUPPORTED_DATASETS)
     result.add_argument("--limit", type=int, default=3)
     result.add_argument("--seed", type=int, default=100)
+    result.add_argument(
+        "--dataset-path",
+        type=Path,
+        help="Override the processed dataset JSONL path (defaults to the upstream dataset-specific filename).",
+    )
     mode = result.add_mutually_exclusive_group(required=True)
     mode.add_argument("--dry-run", action="store_true", help="Validate local resources without credentials or network.")
     mode.add_argument("--execute", action="store_true", help="Explicitly authorize NRP inference and result creation.")
@@ -43,13 +55,15 @@ def load_env_file(path: Path) -> None:
         key = key.strip()
         if not key.startswith("NRP_"):
             raise ResourceValidationError(f"unexpected environment variable {key!r} in {path}")
-        os.environ.setdefault(key, value.strip().strip('"').strip("'"))
+        # The task-local file is authoritative; stale shell values must not
+        # override the credential or endpoint selected for an experiment run.
+        os.environ[key] = value.strip().strip('"').strip("'")
 
 
 def main(argv: list[str] | None = None) -> int:
     args = parser().parse_args(argv)
-    repo_root = Path(__file__).resolve().parents[3]
-    paths = default_paths(repo_root, args.dataset)
+    repo_root = REPO_ROOT
+    paths = default_paths(repo_root, args.dataset, args.dataset_path)
     try:
         if args.limit <= 0:
             raise ResourceValidationError("--limit must be positive")
@@ -73,7 +87,8 @@ def main(argv: list[str] | None = None) -> int:
             adapter=adapter,
         )
         print(f"Pilot artifacts written to {run_dir.relative_to(repo_root)}")
-        return 0
+        rows = [json.loads(line) for line in (run_dir / "results.jsonl").read_text(encoding="utf-8").splitlines()]
+        return 1 if rows and all(row.get("completion_status") != "complete" for row in rows) else 0
     except (ResourceValidationError, NRPConfigurationError, ImportError) as error:
         print(f"Pilot preflight failed:\n{error}", file=sys.stderr)
         return 2

@@ -3,23 +3,38 @@
 \begingroup
 \captionsetup{labelsep=period}
 \renewcommand{\thetable}{P1}
-\caption{Pilot Study: Model and Pipeline Validation}
+\caption{Pilot Study: Model and Pipeline Validation Across Datasets, Models, and Retrieval Strategies. Retrieval calls and total tokens characterize strategy cost.}
 \label{tab:pilot-model-validation}
 \endgroup
-\small
-\setlength{\tabcolsep}{5pt}
+\scriptsize
+\setlength{\tabcolsep}{3pt}
+\renewcommand{\arraystretch}{1.08}
 \begin{adjustbox}{max width=\textwidth}
-\begin{tabular}{@{}lcccccc@{}}
+\begin{tabular}{@{}lllccccccc@{}}
 \toprule
-Model & $N$ & No RAG F1 & Single-step F1 & Multi-step F1 & Valid Runs (\%) & Avg. Latency (s) \\
+Dataset & Model & Strategy & $N$ & Completion (\%) & Mean F1 & Mean EM & Mean Retrieval Calls & Mean Total Tokens & Mean Latency (s) \\
 \midrule
-\texttt{gemma-small} & \NA & \NA & \NA & \NA & \NA & \NA \\
-\texttt{gemma} & \NA & \NA & \NA & \NA & \NA & \NA \\
+\multirow{6}{*}{HotpotQA}
+ & \multirow{3}{*}{Gemma 12B} & A & 30 & 100.0 & 0.137 & 0.100 & 0.000 & 1,552.633 & 1.983 \\
+ & & B & 30 & 100.0 & 0.278 & 0.233 & 1.000 & 3,159.367 & 2.365 \\
+ & & C & 30 & 100.0 & 0.446 & 0.367 & 9.500 & 32,396.233 & 17.006 \\
+\cmidrule(lr){2-10}
+ & \multirow{3}{*}{Gemma 31B} & A & 30 & 100.0 & 0.167 & 0.133 & 0.000 & 1,547.933 & 1.385 \\
+ & & B & 30 & 100.0 & 0.272 & 0.233 & 1.000 & 3,167.600 & 1.715 \\
+ & & C & 30 & 100.0 & 0.486 & 0.400 & 7.433 & 26,192.100 & 11.427 \\
+\midrule
+\multirow{6}{*}{SQuAD}
+ & \multirow{3}{*}{Gemma 12B} & A & \NA & \NA & \NA & \NA & \NA & \NA & \NA \\
+ & & B & \NA & \NA & \NA & \NA & \NA & \NA & \NA \\
+ & & C & \NA & \NA & \NA & \NA & \NA & \NA & \NA \\
+\cmidrule(lr){2-10}
+ & \multirow{3}{*}{Gemma 31B} & A & \NA & \NA & \NA & \NA & \NA & \NA & \NA \\
+ & & B & \NA & \NA & \NA & \NA & \NA & \NA & \NA \\
+ & & C & \NA & \NA & \NA & \NA & \NA & \NA & \NA \\
 \bottomrule
 \end{tabular}
 \end{adjustbox}
-\TableNote{Use approximately 30--50 pilot-only questions, identical across models and strategies A (No Retrieval), B (Single-step Retrieval), and C (Multi-step Retrieval). $N$ is the number of unique evaluation questions. For each model, Valid Runs is $100\times$ the number of valid completed executions divided by the $3N$ expected model--question--strategy executions.}
-\TableNote{Avg. Latency is the arithmetic mean end-to-end wall-clock latency per valid completed strategy execution, pooled across A/B/C for the model; failed and timed-out executions are excluded from the mean but retained in failure statistics. Preserve per-question, per-strategy answers, errors, token usage, and latency.}
-\TableNote{This pilot validates NRP API integration, all three retrieval paths, answer generation and F1 evaluation, failure handling, and runtime/resource feasibility. Pilot questions must not overlap the final held-out test set; pilot results must not be reused as formal results or used to select configurations solely for hypothesis-favorable performance.}
+\TableNote{$N$ is the number of completed questions for the indicated dataset--model--strategy row. All means are computed over completed runs only; completion rate reports completed executions as a percentage of expected executions. A denotes No Retrieval, B Single-step Retrieval, and C Multi-step Retrieval. Mean latency is end-to-end wall-clock time per completed execution.}
+\TableNote{HotpotQA uses 30 deterministically selected development questions per model (seed 100), identical across models and strategies. Total tokens include reported input and output tokens. SQuAD measurements remain pending. These pilot measurements validate feasibility and are not formal test results.}
 \end{table}
 \addtocounter{table}{-1}

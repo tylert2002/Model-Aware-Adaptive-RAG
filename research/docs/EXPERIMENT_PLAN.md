@@ -6,7 +6,7 @@ This is the operational roadmap for Model-Aware Adaptive-RAG. The stable publica
 
 | ID | Experiment | Expected deliverable | Result table / figure | Status |
 |---|---|---|---|---|
-| EP.1 | Pilot Model and Pipeline Validation | **Prerequisite:** NRP API compatibility and pipeline validation; preliminary A/B/C F1; API success/failure statistics; runtime and token-usage summary | P1 | Not Started |
+| EP.1 | Pilot Model and Pipeline Validation | **Prerequisite:** NRP API compatibility and pipeline validation; preliminary A/B/C F1; API success/failure statistics; runtime and token-usage summary | P1 | Complete |
 
 EP.1 uses approximately 30–50 questions that are identical across candidate models and strategies A (No Retrieval), B (Single-step Retrieval), and C (Multi-step Retrieval). It verifies NRP-hosted LLM integration, strategy execution, answer generation, F1 evaluation, failure and timeout handling, retrieval errors, and runtime/resource feasibility before formal Phase 0 begins.
 

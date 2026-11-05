@@ -1,17 +1,54 @@
 \begin{table}[H]
 \centering
-\caption{Validity of automatically generated routing labels against per-question empirical quality oracles.}
+\begingroup
+\renewcommand{\thetable}{2a}
+\caption{Empirical Optimal Strategy Distribution. Percentages partition questions with valid paired A/B/C answer-F1 evaluations by their exact set of F1-maximizing strategies.}
 \label{tab:label-validity}
+\label{tab:label-validity-distribution}
+\endgroup
 \small
+\setlength{\tabcolsep}{5pt}
 \begin{adjustbox}{max width=\textwidth}
-\begin{tabular}{@{}llccccc@{}}
+\begin{tabular}{@{}llccccccccc@{}}
 \toprule
-Dataset & LLM & Number of Questions & Original Label Agreement (\%) & Tie-Aware Agreement (\%) & Mean F1 Regret & Tie Rate (\%) \\
+Dataset & Model & $N$ & A & B & C & AB & AC & BC & ABC & All-failed (\%) \\
 \midrule
-\NA & LLM 1 & \NA & \NA & \NA & \NA & \NA \\
-\NA & LLM 2 & \NA & \NA & \NA & \NA & \NA \\
+HotpotQA & Gemma 12B & \NA & \NA & \NA & \NA & \NA & \NA & \NA & \NA & \NA \\
+HotpotQA & Gemma 31B & \NA & \NA & \NA & \NA & \NA & \NA & \NA & \NA & \NA \\
+\midrule
+SQuAD & Gemma 12B & \NA & \NA & \NA & \NA & \NA & \NA & \NA & \NA & \NA \\
+SQuAD & Gemma 31B & \NA & \NA & \NA & \NA & \NA & \NA & \NA & \NA & \NA \\
 \bottomrule
 \end{tabular}
 \end{adjustbox}
-\TableNote{A/B/C denote No Retrieval, Single-step Retrieval, and Multi-step Retrieval. For $F_{i,s}$ denoting per-question F1, $\mathcal{O}_i=\arg\max_s F_{i,s}$; tie-aware agreement is $\mathbb{1}[y_i\in\mathcal{O}_i]$, and regret is $\max_sF_{i,s}-F_{i,y_i}$. Tie rate is the percentage with $|\mathcal{O}_i|>1$. The cost-aware oracle selects the least expensive quality-equivalent strategy.}
+\TableNote{For question $i$ and strategy $s\in\{A,B,C\}$, let $F_{i,s}$ be downstream answer F1 and $\mathcal{O}_i=\arg\max_s F_{i,s}$. A, B, and C denote unique optima; AB, AC, BC, and ABC denote exact ties at the maximum. These seven categories are mutually exclusive and exhaustive over the $N$ questions with valid evaluations for all three strategies, and each category is reported as a percentage of $N$. No tie is broken arbitrarily.}
+\TableNote{If $F_{i,A}=F_{i,B}=F_{i,C}=0$, the question belongs to ABC mathematically. All-failed reports this all-zero subset of ABC separately and must not be interpreted as three successful answers. Excluded/incomplete question counts are reported separately from $N$: HotpotQA--Gemma 12B: \NA; HotpotQA--Gemma 31B: \NA; SQuAD--Gemma 12B: \NA; SQuAD--Gemma 31B: \NA.}
+\end{table}
+
+\addtocounter{table}{-1}
+\begin{table}[H]
+\centering
+\begingroup
+\renewcommand{\thetable}{2b}
+\caption{Automatic Label Validity Against the Model-Specific Empirical F1 Oracle. Higher agreement and F1 are better ($\uparrow$); lower regret is better ($\downarrow$).}
+\label{tab:label-validity-agreement}
+\endgroup
+\small
+\setlength{\tabcolsep}{4pt}
+\begin{adjustbox}{max width=\textwidth}
+\begin{tabular}{@{}llcccccc@{}}
+\toprule
+Dataset & Model & $N$ & Optimal Agreement (\%) $\uparrow$ & Auto-label Mean F1 $\uparrow$ & Oracle Mean F1 $\uparrow$ & Mean F1 Regret $\downarrow$ & Cost-aware Agreement (\%) $\uparrow$ \\
+\midrule
+HotpotQA & Gemma 12B & \NA & \NA & \NA & \NA & \NA & \NA \\
+HotpotQA & Gemma 31B & \NA & \NA & \NA & \NA & \NA & \NA \\
+\midrule
+SQuAD & Gemma 12B & \NA & \NA & \NA & \NA & \NA & \NA \\
+SQuAD & Gemma 31B & \NA & \NA & \NA & \NA & \NA & \NA \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+\TableNote{The automatic label $y_i$ must come from the original Adaptive-RAG labeling procedure or a verified original label artifact; it is neither a routing-classifier prediction nor a label derived from Gemma outcomes. Optimal Agreement is the mean of $\mathbb{1}[y_i\in\mathcal{O}_i]$, so every member of an F1-optimal tie is a valid match. The empirical oracle is computed independently for each model from paired A/B/C outcomes and is retrospective, not a deployable policy.}
+\TableNote{Auto-label Mean F1 averages $F_{i,y_i}$; Oracle Mean F1 averages $\max_sF_{i,s}$; and Mean F1 Regret averages the exact per-question differences $\max_sF_{i,s}-F_{i,y_i}$ before rounding. Include only questions with a verified automatic label and valid evaluations for all three strategies; report exclusions separately.}
+\TableNote{Cost-aware Agreement remains pending until a measured, consistent cost definition is frozen. For an F1 tie, form the subset of $\mathcal{O}_i$ attaining minimum measured cost and count agreement when $y_i$ belongs to that subset. If multiple tied strategies also have equal minimum cost, retain all of them as valid matches; do not impose an arbitrary order.}
 \end{table}
