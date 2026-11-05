@@ -1,0 +1,46 @@
+\documentclass[10pt]{article}
+
+\usepackage[letterpaper,margin=0.75in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{tabularx}
+\usepackage{adjustbox}
+\usepackage{array}
+\usepackage{float}
+\usepackage{amsmath,amssymb}
+\usepackage{pifont}
+\usepackage{caption}
+\usepackage{xcolor}
+
+\captionsetup{font=small,labelfont=bf,skip=5pt}
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.12}
+\setlength{\textfloatsep}{12pt plus 2pt minus 2pt}
+\setlength{\floatsep}{12pt plus 2pt minus 2pt}
+\newcommand{\NA}{--}
+\newcommand{\yes}{\ding{51}}
+\newcommand{\no}{\ding{55}}
+\newcommand{\ours}{Model-Aware Adaptive-RAG}
+\newcommand{\TableNote}[1]{\vspace{2pt}\par\begin{minipage}{0.98\linewidth}\footnotesize\textit{Note:} #1\end{minipage}}
+
+\begin{document}
+\begin{center}
+{\LARGE\bfseries Experimental Tables}
+\end{center}
+\vspace{0.5em}
+
+\setcounter{table}{-1}
+\input{tables/table0_progress}
+\input{tables/table_s1_nrp_connectivity}
+\input{tables/pilot_model_validation}
+\input{tables/table1_datasets}
+\input{tables/table2_label_validity}
+\input{tables/table3_retrieval_gain}
+\input{tables/table4_main_results}
+\input{tables/table5_generalization}
+\input{tables/table6_ablation}
+
+\end{document}

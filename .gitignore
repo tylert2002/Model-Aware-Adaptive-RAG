@@ -16,3 +16,46 @@ __pycache__/
 elasticsearch-7.10.2/
 elasticsearch-7.10.2-linux-x86_64.tar.gz
 elasticsearch-7.10.2-linux-x86_64.tar.gz.sha512
+
+# Local environments, caches, and temporary editor/test artifacts
+.env
+.env.*
+!.env.example
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+*.swp
+*.swo
+*~
+
+# Credentials and private keys (keep sanitized examples tracked)
+*.pem
+*.key
+credentials.json
+secrets.json
+
+# Downloaded model weights and training checkpoints
+checkpoints/
+**/checkpoint-*/
+*.ckpt
+*.safetensors
+*.pt
+*.pth
+
+# Generated LaTeX build files; source .tex and small result files remain tracked
+research/paper/*.aux
+research/paper/*.bbl
+research/paper/*.bcf
+research/paper/*.blg
+research/paper/*.fdb_latexmk
+research/paper/*.fls
+research/paper/*.log
+research/paper/*.out
+research/paper/*.run.xml
+research/paper/*.synctex.gz
+research/paper/*.toc
+research/paper/*.pdf

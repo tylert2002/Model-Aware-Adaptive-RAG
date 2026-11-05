@@ -1,0 +1,25 @@
+\begin{table}[H]
+\centering
+\begingroup
+\captionsetup{labelsep=period}
+\renewcommand{\thetable}{P1}
+\caption{Pilot Study: Model and Pipeline Validation}
+\label{tab:pilot-model-validation}
+\endgroup
+\small
+\setlength{\tabcolsep}{5pt}
+\begin{adjustbox}{max width=\textwidth}
+\begin{tabular}{@{}lcccccc@{}}
+\toprule
+Model & $N$ & No RAG F1 & Single-step F1 & Multi-step F1 & Valid Runs (\%) & Avg. Latency (s) \\
+\midrule
+\texttt{gemma-small} & \NA & \NA & \NA & \NA & \NA & \NA \\
+\texttt{gemma} & \NA & \NA & \NA & \NA & \NA & \NA \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+\TableNote{Use approximately 30--50 pilot-only questions, identical across models and strategies A (No Retrieval), B (Single-step Retrieval), and C (Multi-step Retrieval). $N$ is the number of unique evaluation questions. For each model, Valid Runs is $100\times$ the number of valid completed executions divided by the $3N$ expected model--question--strategy executions.}
+\TableNote{Avg. Latency is the arithmetic mean end-to-end wall-clock latency per valid completed strategy execution, pooled across A/B/C for the model; failed and timed-out executions are excluded from the mean but retained in failure statistics. Preserve per-question, per-strategy answers, errors, token usage, and latency.}
+\TableNote{This pilot validates NRP API integration, all three retrieval paths, answer generation and F1 evaluation, failure handling, and runtime/resource feasibility. Pilot questions must not overlap the final held-out test set; pilot results must not be reused as formal results or used to select configurations solely for hypothesis-favorable performance.}
+\end{table}
+\addtocounter{table}{-1}

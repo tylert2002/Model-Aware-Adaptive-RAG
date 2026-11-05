@@ -1,0 +1,44 @@
+\begin{table}[H]
+\centering
+\caption{Dataset statistics and evaluation conditions for the repository-supported single-hop and multi-hop QA benchmarks.}
+\label{tab:datasets}
+\small
+\begin{adjustbox}{max width=\textwidth}
+\begin{tabular}{@{}llccccccl@{}}
+\toprule
+Dataset & Question Type & Total Questions & Calibration Questions & Validation Questions & Test Questions & Retrieval Corpus & Evaluation Metric \\
+\midrule
+Natural Questions & Single-hop & \NA & \NA & \NA & \NA & Wikipedia passages & Token F1 / Exact Match \\
+TriviaQA & Single-hop & \NA & \NA & \NA & \NA & Wikipedia passages & Token F1 / Exact Match \\
+SQuAD & Single-hop & \NA & \NA & \NA & \NA & Wikipedia passages & Token F1 / Exact Match \\
+\midrule
+HotpotQA & Multi-hop & \NA & \NA & \NA & \NA & HotpotQA index & Token F1 / Exact Match \\
+2WikiMultiHopQA & Multi-hop & \NA & \NA & \NA & \NA & 2WikiMultiHopQA index & Token F1 / Exact Match \\
+MuSiQue & Multi-hop & \NA & \NA & \NA & \NA & MuSiQue index & Token F1 / Exact Match \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+\TableNote{Dataset support and corpus names are confirmed from the original repository documentation. Counts remain unset until split manifests are frozen. ``Single-hop'' and ``Multi-hop'' reflect the repository's dataset grouping, not a new per-question annotation.}
+
+\vspace{8pt}
+\textbf{Experimental configuration}
+\vspace{3pt}
+
+\begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}X@{}}
+\toprule
+Setting & Recorded value \\
+\midrule
+LLM 1 name and version & \NA \\
+LLM 2 name and version & \NA \\
+Decoding parameters & \NA \\
+Maximum generated tokens & \NA \\
+Prompt/template version & \NA \\
+Retriever and index version & \NA \\
+Top-$k$ / stopping rule & \NA \\
+Multi-step maximum steps & \NA \\
+Hardware / serving setup & \NA \\
+Evaluation code revision & \NA \\
+\bottomrule
+\end{tabularx}
+\TableNote{Record immutable model identifiers where possible. Generation and retrieval settings must be fixed within each comparison.}
+\end{table}

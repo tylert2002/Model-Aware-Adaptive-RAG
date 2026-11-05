@@ -1,0 +1,27 @@
+\begin{table}[H]
+\centering
+\begingroup
+\captionsetup{labelsep=period}
+\renewcommand{\thetable}{S1}
+\caption{NRP API Connectivity and Model Verification}
+\label{tab:nrp-connectivity}
+\endgroup
+\small
+\setlength{\tabcolsep}{4pt}
+\begin{tabularx}{\textwidth}{@{}
+>{\raggedright\arraybackslash}p{2.15cm}
+>{\raggedright\arraybackslash}X
+>{\centering\arraybackslash}p{1.15cm}
+>{\centering\arraybackslash}p{1.45cm}
+>{\centering\arraybackslash}p{1.55cm}
+>{\centering\arraybackslash}p{1.65cm}@{}}
+\toprule
+Model Alias & Resolved Model & Status & Latency (s) & Input Tokens & Output Tokens \\
+\midrule
+\texttt{gemma-small} & \texttt{google/gemma-4-12B-it-qat-w4a16-ct} & Pass & 1.058 & 21 & 6 \\
+\texttt{gemma} & \texttt{google/gemma-4-31B-it-qat-w4a16-ct} & Pass & 0.567 & 21 & 6 \\
+\bottomrule
+\end{tabularx}
+\TableNote{Measurements are from one API connectivity request per model. They verify endpoint access and model resolution only; they do not represent RAG performance or typical model latency.}
+\end{table}
+\addtocounter{table}{-1}

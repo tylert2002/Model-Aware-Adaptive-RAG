@@ -1,0 +1,17 @@
+\begin{table}[H]
+\centering
+\caption{Validity of automatically generated routing labels against per-question empirical quality oracles.}
+\label{tab:label-validity}
+\small
+\begin{adjustbox}{max width=\textwidth}
+\begin{tabular}{@{}llccccc@{}}
+\toprule
+Dataset & LLM & Number of Questions & Original Label Agreement (\%) & Tie-Aware Agreement (\%) & Mean F1 Regret & Tie Rate (\%) \\
+\midrule
+\NA & LLM 1 & \NA & \NA & \NA & \NA & \NA \\
+\NA & LLM 2 & \NA & \NA & \NA & \NA & \NA \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+\TableNote{A/B/C denote No Retrieval, Single-step Retrieval, and Multi-step Retrieval. For $F_{i,s}$ denoting per-question F1, $\mathcal{O}_i=\arg\max_s F_{i,s}$; tie-aware agreement is $\mathbb{1}[y_i\in\mathcal{O}_i]$, and regret is $\max_sF_{i,s}-F_{i,y_i}$. Tie rate is the percentage with $|\mathcal{O}_i|>1$. The cost-aware oracle selects the least expensive quality-equivalent strategy.}
+\end{table}

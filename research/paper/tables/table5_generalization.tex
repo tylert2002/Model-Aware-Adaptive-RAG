@@ -1,0 +1,26 @@
+\begin{table}[H]
+\centering
+\caption{Cross-model generalization and adaptation under disjoint calibration and shared held-out evaluation data.}
+\label{tab:generalization}
+\small
+\begin{adjustbox}{max width=\textwidth}
+\begin{tabular}{@{}llccccc@{}}
+\toprule
+Evaluation LLM & Router / Profile Source & Calibration Questions & F1 (\%) & Exact Match (\%) & Mean F1 Regret & Avg. Retrieval Calls \\
+\midrule
+\multirow{4}{*}{LLM 1}
+& Original Adaptive-RAG router & \NA & \NA & \NA & \NA & \NA \\
+& Router/profile calibrated for LLM 1 & \NA & \NA & \NA & \NA & \NA \\
+& Router/profile calibrated for LLM 2 & \NA & \NA & \NA & \NA & \NA \\
+& Proposed model-specific calibration & \NA & \NA & \NA & \NA & \NA \\
+\midrule
+\multirow{4}{*}{LLM 2}
+& Original Adaptive-RAG router & \NA & \NA & \NA & \NA & \NA \\
+& Router/profile calibrated for LLM 1 & \NA & \NA & \NA & \NA & \NA \\
+& Router/profile calibrated for LLM 2 & \NA & \NA & \NA & \NA & \NA \\
+& Proposed model-specific calibration & \NA & \NA & \NA & \NA & \NA \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+\TableNote{Calibration Questions is the number used to fit or construct the named router/profile. Store question identifiers to verify zero overlap with evaluation. Clarify how ``proposed model-specific calibration'' differs from the matched profile row when finalizing the method.}
+\end{table}
