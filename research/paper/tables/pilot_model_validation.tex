@@ -1,0 +1,40 @@
+\begin{table}[H]
+\centering
+\begingroup
+\captionsetup{labelsep=period}
+\renewcommand{\thetable}{P1}
+\caption{Pilot Study: Model and Pipeline Validation Across Datasets, Models, and Retrieval Strategies. Retrieval calls and total tokens characterize strategy cost.}
+\label{tab:pilot-model-validation}
+\endgroup
+\scriptsize
+\setlength{\tabcolsep}{3pt}
+\renewcommand{\arraystretch}{1.08}
+\begin{adjustbox}{max width=\textwidth}
+\begin{tabular}{@{}lllccccccc@{}}
+\toprule
+Dataset & Model & Strategy & $N$ & Completion (\%) & Mean F1 & Mean EM & Mean Retrieval Calls & Mean Total Tokens & Mean Latency (s) \\
+\midrule
+\multirow{6}{*}{HotpotQA}
+ & \multirow{3}{*}{Gemma 12B} & A & 30 & 100.0 & 0.137 & 0.100 & 0.000 & 1,552.633 & 1.983 \\
+ & & B & 30 & 100.0 & 0.278 & 0.233 & 1.000 & 3,159.367 & 2.365 \\
+ & & C & 30 & 100.0 & 0.446 & 0.367 & 9.500 & 32,396.233 & 17.006 \\
+\cmidrule(lr){2-10}
+ & \multirow{3}{*}{Gemma 31B} & A & 30 & 100.0 & 0.167 & 0.133 & 0.000 & 1,547.933 & 1.385 \\
+ & & B & 30 & 100.0 & 0.272 & 0.233 & 1.000 & 3,167.600 & 1.715 \\
+ & & C & 30 & 100.0 & 0.486 & 0.400 & 7.433 & 26,192.100 & 11.427 \\
+\midrule
+\multirow{6}{*}{SQuAD}
+ & \multirow{3}{*}{Gemma 12B} & A & \NA & \NA & \NA & \NA & \NA & \NA & \NA \\
+ & & B & \NA & \NA & \NA & \NA & \NA & \NA & \NA \\
+ & & C & \NA & \NA & \NA & \NA & \NA & \NA & \NA \\
+\cmidrule(lr){2-10}
+ & \multirow{3}{*}{Gemma 31B} & A & \NA & \NA & \NA & \NA & \NA & \NA & \NA \\
+ & & B & \NA & \NA & \NA & \NA & \NA & \NA & \NA \\
+ & & C & \NA & \NA & \NA & \NA & \NA & \NA & \NA \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+\TableNote{$N$ is the number of completed questions for the indicated dataset--model--strategy row. All means are computed over completed runs only; completion rate reports completed executions as a percentage of expected executions. A denotes No Retrieval, B Single-step Retrieval, and C Multi-step Retrieval. Mean latency is end-to-end wall-clock time per completed execution.}
+\TableNote{HotpotQA uses 30 deterministically selected development questions per model (seed 100), identical across models and strategies. Total tokens include reported input and output tokens. SQuAD measurements remain pending. These pilot measurements validate feasibility and are not formal test results.}
+\end{table}
+\addtocounter{table}{-1}

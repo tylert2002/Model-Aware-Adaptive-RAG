@@ -1,0 +1,19 @@
+\begin{table}[H]
+\centering
+\caption{Ablation of question features, model profiles, and cost-aware selection in model-aware routing.}
+\label{tab:ablation}
+\small
+\begin{adjustbox}{max width=\textwidth}
+\begin{tabular}{@{}lcccccc@{}}
+\toprule
+Method Variant & Question Features & Model Profile & Cost-Aware Selection & F1 (\%) & Mean F1 Regret & Avg. Retrieval Calls \\
+\midrule
+Question-only routing & \yes & \no & \no & \NA & \NA & \NA \\
+Model-profile-only routing & \no & \yes & \no & \NA & \NA & \NA \\
+Question + Model Profile & \yes & \yes & \no & \NA & \NA & \NA \\
+Question + Model Profile + Cost Awareness (Full Method) & \yes & \yes & \yes & \NA & \NA & \NA \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+\TableNote{\yes{} indicates an enabled component and \no{} a disabled component. Cost-aware selection must use the same pre-registered quality-equivalence and cost definitions as the oracle analysis. All variants must be implementable without access to test answers at routing time.}
+\end{table}

@@ -1,0 +1,30 @@
+\begin{table}[H]
+\centering
+\caption{Main comparison of answer quality and retrieval efficiency on a shared evaluation set.}
+\label{tab:main-results}
+\small
+\begin{adjustbox}{max width=\textwidth}
+\begin{tabular}{@{}llccccc@{}}
+\toprule
+& & \multicolumn{2}{c}{Answer Quality} & \multicolumn{3}{c}{Retrieval Efficiency} \\
+\cmidrule(lr){3-4}\cmidrule(l){5-7}
+LLM & Routing Method & F1 (\%) & Exact Match (\%) & Avg. Retrieval Calls & Avg. Latency (s) & Avg. Cost (USD / Question) \\
+\midrule
+\multirow{5}{*}{LLM 1}
+& No Retrieval & \NA & \NA & \NA & \NA & \NA \\
+& Always Single-step Retrieval & \NA & \NA & \NA & \NA & \NA \\
+& Always Multi-step Retrieval & \NA & \NA & \NA & \NA & \NA \\
+& Original Adaptive-RAG & \NA & \NA & \NA & \NA & \NA \\
+& Proposed \ours & \NA & \NA & \NA & \NA & \NA \\
+\midrule
+\multirow{5}{*}{LLM 2}
+& No Retrieval & \NA & \NA & \NA & \NA & \NA \\
+& Always Single-step Retrieval & \NA & \NA & \NA & \NA & \NA \\
+& Always Multi-step Retrieval & \NA & \NA & \NA & \NA & \NA \\
+& Original Adaptive-RAG & \NA & \NA & \NA & \NA & \NA \\
+& Proposed \ours & \NA & \NA & \NA & \NA & \NA \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+\TableNote{Define the cost column's scope before collection: retrieval cost, model-inference cost, and total API cost are distinct and must not be conflated. Report the chosen scope and price date; latency should use a fixed measurement protocol and comparable serving conditions.}
+\end{table}
