@@ -10,6 +10,7 @@ from unittest.mock import patch
 
 from . import run
 from .nrp_adapter import GenerationResult, NRPChatAdapter, NRPConfig, NRPRequestError
+from .inference_safe_reader import InferenceSafeManifestError, read_inference_safe_examples
 from .pipeline import (
     STRATEGIES,
     AdaptiveRAGStrategyBackend,
@@ -18,6 +19,7 @@ from .pipeline import (
     aggregate_trace,
     default_paths,
     run_pilot,
+    read_selected_examples,
     score_answer,
     select_question_ids,
     upstream_import_context,
@@ -70,6 +72,70 @@ def fake_transport(request, timeout):
 
 
 class PilotPipelineTests(unittest.TestCase):
+    def test_inference_safe_reader_omits_answers_contexts_and_gold_metadata(self):
+        with tempfile.TemporaryDirectory() as temp_dir:
+            path = Path(temp_dir) / "safe.jsonl"
+            path.write_text(
+                json.dumps(
+                    {
+                        "dataset": "hotpotqa",
+                        "question_id": "frozen-qid",
+                        "question_text": "Which item is older?",
+                        "level": "hard",
+                        "type": "comparison",
+                    }
+                )
+                + "\n",
+                encoding="utf-8",
+            )
+            example = list(read_inference_safe_examples(path))[0]
+        self.assertEqual(example["qid"], "frozen-qid")
+        self.assertEqual(example["question"], "Which item is older?")
+        self.assertEqual(example["titles"], [])
+        self.assertEqual(example["paras"], [])
+        self.assertNotIn("answer", example)
+        self.assertNotIn("real_pids", example)
+        self.assertFalse(any(key.startswith("gold_") for key in example["metadata"]))
+
+    def test_inference_safe_reader_rejects_answer_or_context_fields(self):
+        base = {
+            "dataset": "hotpotqa",
+            "question_id": "q1",
+            "question_text": "Question?",
+            "level": "hard",
+            "type": "bridge",
+        }
+        for forbidden in ("answers_objects", "contexts"):
+            with self.subTest(forbidden=forbidden), tempfile.TemporaryDirectory() as temp_dir:
+                path = Path(temp_dir) / "unsafe.jsonl"
+                path.write_text(json.dumps({**base, forbidden: []}) + "\n", encoding="utf-8")
+                with self.assertRaises(InferenceSafeManifestError):
+                    list(read_inference_safe_examples(path))
+
+    def test_selected_examples_bypass_upstream_reader_for_safe_manifest(self):
+        with tempfile.TemporaryDirectory() as temp_dir:
+            path = Path(temp_dir) / "safe.jsonl"
+            path.write_text(
+                json.dumps(
+                    {
+                        "dataset": "hotpotqa",
+                        "question_id": "q1",
+                        "question_text": "Question?",
+                        "level": "hard",
+                        "type": "bridge",
+                    }
+                )
+                + "\n",
+                encoding="utf-8",
+            )
+            backend = types.SimpleNamespace(
+                reader=types.SimpleNamespace(
+                    read_examples=lambda _: (_ for _ in ()).throw(AssertionError("upstream reader used"))
+                )
+            )
+            examples = read_selected_examples(backend, path, ["q1"])
+        self.assertEqual([example["qid"] for example in examples], ["q1"])
+
     def test_hotpotqa_default_path_uses_upstream_archive_filename(self):
         root = Path("/repo")
         paths = default_paths(root, "hotpotqa")
@@ -211,6 +277,59 @@ class PilotPipelineTests(unittest.TestCase):
             }
             self.assertTrue(expected.issubset(rows[0]))
             self.assertEqual(backends["C"].executions, ["q1"])
+
+    def test_inference_safe_run_never_scores_or_writes_references(self):
+        with tempfile.TemporaryDirectory() as temp_dir:
+            root = Path(temp_dir)
+            upstream = root / "adaptive-rag"
+            dataset_path = upstream / "safe.jsonl"
+            dataset_path.parent.mkdir(parents=True)
+            dataset_path.write_text(
+                json.dumps(
+                    {
+                        "dataset": "hotpotqa",
+                        "question_id": "frozen-qid",
+                        "question_text": "Question?",
+                        "level": "hard",
+                        "type": "bridge",
+                    }
+                )
+                + "\n",
+                encoding="utf-8",
+            )
+            (upstream / "base_configs").mkdir()
+            (upstream / "prompts" / "hotpotqa").mkdir(parents=True)
+            for spec in STRATEGIES:
+                spec.config_path(upstream, "hotpotqa").write_text("{}", encoding="utf-8")
+            retriever = upstream / ".retriever_address.jsonnet"
+            retriever.write_text("{}", encoding="utf-8")
+            results = root / "results"
+            results.mkdir()
+            paths = PilotPaths(root, upstream, dataset_path, retriever, results)
+            backends = {spec.code: FakeBackend(spec, 1, 0) for spec in STRATEGIES}
+            adapter = NRPChatAdapter(NRPConfig(api_key="placeholder", max_retries=0), transport=fake_transport)
+            with patch(
+                "research.experiments.pilot.pipeline.score_answer",
+                side_effect=AssertionError("safe inference attempted scoring"),
+            ), patch(
+                "research.experiments.pilot.adaptive_rag_bridge.fit_prompt_with_upstream",
+                side_effect=lambda **kwargs: kwargs["original_prompt"],
+            ):
+                run_dir = run_pilot(
+                    paths=paths,
+                    dataset="hotpotqa",
+                    model="gemma-small",
+                    limit=1,
+                    seed=1,
+                    adapter=adapter,
+                    backends=backends,
+                )
+            rows = [json.loads(line) for line in (run_dir / "results.jsonl").read_text().splitlines()]
+            metadata = json.loads((run_dir / "run_metadata.json").read_text())
+        self.assertEqual(metadata["input_schema"], "inference_safe")
+        self.assertEqual([row["question_id"] for row in rows], ["frozen-qid"] * 3)
+        self.assertTrue(all(row["reference_answers"] is None for row in rows))
+        self.assertTrue(all(row["f1"] is None and row["exact_match"] is None for row in rows))
 
     def test_trace_aggregation_preserves_unavailable_usage(self):
         with tempfile.TemporaryDirectory() as temp_dir:

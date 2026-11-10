@@ -18,6 +18,7 @@ from pathlib import Path
 from typing import Any, Iterable, Mapping, Protocol
 
 from .adaptive_rag_bridge import AdaptiveRAGNRPGenerator, load_local_gpt2_tokenizer
+from .inference_safe_reader import is_inference_safe_manifest, read_inference_safe_examples
 from .nrp_adapter import NRPChatAdapter, NRPConfigurationError, NRPRequestError
 
 
@@ -275,7 +276,11 @@ def build_upstream_backends(paths: PilotPaths, dataset: str) -> dict[str, Adapti
 
 def read_selected_examples(backend: AdaptiveRAGStrategyBackend, dataset_path: Path, selected_ids: list[str]) -> list[dict[str, Any]]:
     selected_set = set(selected_ids)
-    examples = {example["qid"]: example for example in backend.reader.read_examples(str(dataset_path)) if example["qid"] in selected_set}
+    if is_inference_safe_manifest(dataset_path):
+        source = read_inference_safe_examples(dataset_path)
+    else:
+        source = backend.reader.read_examples(str(dataset_path))
+    examples = {example["qid"]: example for example in source if example["qid"] in selected_set}
     missing = selected_set - examples.keys()
     if missing:
         raise ResourceValidationError("upstream reader omitted selected IDs: " + ", ".join(sorted(missing)))
@@ -440,6 +445,7 @@ def run_pilot(
         "dataset": dataset,
         "dataset_path": display_path(paths.dataset_path, paths.repo_root),
         "dataset_sha256": file_sha256(paths.dataset_path),
+        "input_schema": "inference_safe" if is_inference_safe_manifest(paths.dataset_path) else "evaluation",
         "selected_question_ids": selected_ids,
         "limit": limit,
         "seed": seed,
@@ -500,7 +506,10 @@ def run_pilot(
                 try:
                     with capture_retrieval_trace(retrieval_trace_path):
                         answer, chain, retrieval_calls = backend.execute(example, generator)
-                    f1, exact_match = score_answer(dataset, answer, example["answer"])
+                    if "answer" in example:
+                        f1, exact_match = score_answer(dataset, answer, example["answer"])
+                    else:
+                        f1, exact_match = None, None
                 except NRPRequestError as error:
                     retrieval_calls = int(getattr(backend, "last_retrieval_calls", retrieval_calls))
                     status, error_category, f1, exact_match = "incomplete", f"api:{error.category}", None, None
@@ -508,7 +517,14 @@ def run_pilot(
                     retrieval_calls = int(getattr(backend, "last_retrieval_calls", retrieval_calls))
                     status, error_category, f1, exact_match = "incomplete", classify_error(error), None, None
                 trace = aggregate_trace(trace_path)
-                references = list(example["answer"]) if isinstance(example["answer"], (list, tuple)) else [example["answer"]]
+                if "answer" in example:
+                    references = (
+                        list(example["answer"])
+                        if isinstance(example["answer"], (list, tuple))
+                        else [example["answer"]]
+                    )
+                else:
+                    references = None
                 row = {
                     "question_id": question_id,
                     "dataset": dataset,
