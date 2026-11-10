@@ -2,7 +2,7 @@
 \centering
 \begingroup
 \renewcommand{\thetable}{2a}
-\caption{Empirical Optimal Strategy Distribution. Percentages partition questions with valid paired A/B/C answer-F1 evaluations by their exact set of F1-maximizing strategies.}
+\caption{Empirical F1-Optimal Strategy Distribution on the Expanded HotpotQA Evaluation. Percentages partition the 500 paired A/B/C questions by their exact set of F1-maximizing strategies.}
 \label{tab:label-validity}
 \label{tab:label-validity-distribution}
 \endgroup
@@ -11,18 +11,16 @@
 \begin{adjustbox}{max width=\textwidth}
 \begin{tabular}{@{}llccccccccc@{}}
 \toprule
-Dataset & Model & $N$ & A & B & C & AB & AC & BC & ABC & All-failed (\%) \\
+Dataset & Model & $N$ & A & B & C & AB & AC & BC & ABC & All-failed (\%) \tabularnewline
 \midrule
-HotpotQA & Gemma 12B & \NA & \NA & \NA & \NA & \NA & \NA & \NA & \NA & \NA \\
-HotpotQA & Gemma 31B & \NA & \NA & \NA & \NA & \NA & \NA & \NA & \NA & \NA \\
-\midrule
-SQuAD & Gemma 12B & \NA & \NA & \NA & \NA & \NA & \NA & \NA & \NA & \NA \\
-SQuAD & Gemma 31B & \NA & \NA & \NA & \NA & \NA & \NA & \NA & \NA & \NA \\
+% TABLE2A_ROWS_BEGIN
+HotpotQA & Gemma 12B & 500 & 12.2 & 8.2 & 20.8 & 1.8 & 3.0 & 17.6 & 36.4 & 23.6 \tabularnewline
+HotpotQA & Gemma 31B & 500 & 13.0 & 2.8 & 18.6 & 1.8 & 5.0 & 21.4 & 37.4 & 20.2 \tabularnewline
+% TABLE2A_ROWS_END
 \bottomrule
 \end{tabular}
 \end{adjustbox}
-\TableNote{For question $i$ and strategy $s\in\{A,B,C\}$, let $F_{i,s}$ be downstream answer F1 and $\mathcal{O}_i=\arg\max_s F_{i,s}$. A, B, and C denote unique optima; AB, AC, BC, and ABC denote exact ties at the maximum. These seven categories are mutually exclusive and exhaustive over the $N$ questions with valid evaluations for all three strategies, and each category is reported as a percentage of $N$. No tie is broken arbitrarily.}
-\TableNote{If $F_{i,A}=F_{i,B}=F_{i,C}=0$, the question belongs to ABC mathematically. All-failed reports this all-zero subset of ABC separately and must not be interpreted as three successful answers. Excluded/incomplete question counts are reported separately from $N$: HotpotQA--Gemma 12B: \NA; HotpotQA--Gemma 31B: \NA; SQuAD--Gemma 12B: \NA; SQuAD--Gemma 31B: \NA.}
+\TableNote{$N$ is 500 unique HotpotQA local-development questions in Phase~0, identical across A/B/C within each model (1,500 inference records per model). For $\mathcal{O}_i=\arg\max_sF_{i,s}$, A/B/C are unique optima and AB/AC/BC/ABC are exact ties; the seven groups partition the same 500 IDs. All-failed is the all-zero subset of ABC.}
 \end{table}
 
 \addtocounter{table}{-1}
@@ -30,25 +28,30 @@ SQuAD & Gemma 31B & \NA & \NA & \NA & \NA & \NA & \NA & \NA & \NA & \NA \\
 \centering
 \begingroup
 \renewcommand{\thetable}{2b}
-\caption{Automatic Label Validity Against the Model-Specific Empirical F1 Oracle. Higher agreement and F1 are better ($\uparrow$); lower regret is better ($\downarrow$).}
+\caption{Original Automatic Silver-Label Validity Against the Model-Specific Empirical F1 Oracle. Higher agreement and F1 are better ($\uparrow$); lower regret is better ($\downarrow$).}
 \label{tab:label-validity-agreement}
 \endgroup
 \small
 \setlength{\tabcolsep}{4pt}
 \begin{adjustbox}{max width=\textwidth}
-\begin{tabular}{@{}llcccccc@{}}
+\begin{tabular}{@{}lllcccccc@{}}
 \toprule
-Dataset & Model & $N$ & Optimal Agreement (\%) $\uparrow$ & Auto-label Mean F1 $\uparrow$ & Oracle Mean F1 $\uparrow$ & Mean F1 Regret $\downarrow$ & Cost-aware Agreement (\%) $\uparrow$ \\
+Dataset & Model & Label source & $N$ & Optimal Agreement (\%) $\uparrow$ & Auto-label Mean F1 $\uparrow$ & Oracle Mean F1 $\uparrow$ & Mean F1 Regret $\downarrow$ & Cost-aware Agreement (\%) $\uparrow$ \\
 \midrule
-HotpotQA & Gemma 12B & \NA & \NA & \NA & \NA & \NA & \NA \\
-HotpotQA & Gemma 31B & \NA & \NA & \NA & \NA & \NA & \NA \\
+% TABLE2B_ROWS_BEGIN
+HotpotQA & Gemma 12B & FLAN-T5 XL & 241 & 75.9 & 0.641 & 0.813 & 0.172 & 55.6 \\
+HotpotQA & Gemma 12B & FLAN-T5 XXL & 254 & 78.3 & 0.669 & 0.822 & 0.153 & 61.8 \\
+HotpotQA & Gemma 12B & GPT & 262 & 67.2 & 0.563 & 0.807 & 0.244 & 59.9 \\
+HotpotQA & Gemma 31B & FLAN-T5 XL & 241 & 81.3 & 0.754 & 0.889 & 0.135 & 60.2 \\
+HotpotQA & Gemma 31B & FLAN-T5 XXL & 254 & 82.7 & 0.749 & 0.885 & 0.136 & 62.2 \\
+HotpotQA & Gemma 31B & GPT & 262 & 71.0 & 0.656 & 0.888 & 0.232 & 63.4 \\
+% TABLE2B_ROWS_END
 \midrule
-SQuAD & Gemma 12B & \NA & \NA & \NA & \NA & \NA & \NA \\
-SQuAD & Gemma 31B & \NA & \NA & \NA & \NA & \NA & \NA \\
+SQuAD & Gemma 12B & -- & \NA & \NA & \NA & \NA & \NA & \NA \\
+SQuAD & Gemma 31B & -- & \NA & \NA & \NA & \NA & \NA & \NA \\
 \bottomrule
 \end{tabular}
 \end{adjustbox}
-\TableNote{The automatic label $y_i$ must come from the original Adaptive-RAG labeling procedure or a verified original label artifact; it is neither a routing-classifier prediction nor a label derived from Gemma outcomes. Optimal Agreement is the mean of $\mathbb{1}[y_i\in\mathcal{O}_i]$, so every member of an F1-optimal tie is a valid match. The empirical oracle is computed independently for each model from paired A/B/C outcomes and is retrospective, not a deployable policy.}
-\TableNote{Auto-label Mean F1 averages $F_{i,y_i}$; Oracle Mean F1 averages $\max_sF_{i,s}$; and Mean F1 Regret averages the exact per-question differences $\max_sF_{i,s}-F_{i,y_i}$ before rounding. Include only questions with a verified automatic label and valid evaluations for all three strategies; report exclusions separately.}
-\TableNote{Cost-aware Agreement remains pending until a measured, consistent cost definition is frozen. For an F1 tie, form the subset of $\mathcal{O}_i$ attaining minimum measured cost and count agreement when $y_i$ belongs to that subset. If multiple tied strategies also have equal minimum cost, retain all of them as valid matches; do not impose an arbitrary order.}
+\TableNote{$N$ is verified silver-label coverage within the 500-question HotpotQA Phase~0 local-development set: XL/XXL/GPT exclude 259/246/238 unlabeled IDs, respectively. Each row's F1, regret, and agreement metrics use exactly its same matched IDs and their A/B/C records; all-zero questions contribute zero. SQuAD has no completed paired outcomes or aligned labels.}
+\TableNote{$y_i$ is an original silver label, not a classifier prediction or Gemma-derived label. With $\mathcal{O}_i=\arg\max_sF_{i,s}$, ties are valid; cost-aware agreement retains minimum-total-token members of $\mathcal{O}_i$. Regret is the unrounded Oracle-minus-auto-label mean. Full-500 Oracle F1 is separate in the offline artifact.}
 \end{table}

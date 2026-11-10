@@ -1,0 +1,141 @@
+{
+  "scope": "source-specific exact-ID matched subsets",
+  "rows": [
+    {
+      "n": 241,
+      "question_id_sha256": "9ad2ea3b077469b8255c2ee9275352ac0d557922abe3d9913022147ca5c5935a",
+      "metric_question_id_sha256": {
+        "auto_label_f1": "9ad2ea3b077469b8255c2ee9275352ac0d557922abe3d9913022147ca5c5935a",
+        "oracle_f1": "9ad2ea3b077469b8255c2ee9275352ac0d557922abe3d9913022147ca5c5935a",
+        "regret": "9ad2ea3b077469b8255c2ee9275352ac0d557922abe3d9913022147ca5c5935a",
+        "agreement": "9ad2ea3b077469b8255c2ee9275352ac0d557922abe3d9913022147ca5c5935a",
+        "cost_agreement": "9ad2ea3b077469b8255c2ee9275352ac0d557922abe3d9913022147ca5c5935a"
+      },
+      "optimal_agreement_percent": 75.93360995850622,
+      "auto_label_mean_f1": 0.6407053941908714,
+      "oracle_mean_f1": 0.8130290456431535,
+      "mean_f1_regret": 0.17232365145228215,
+      "cost_aware_agreement_percent": 55.601659751037346,
+      "all_zero_questions": 23,
+      "model_alias": "gemma-small",
+      "model": "Gemma 12B",
+      "label_source": "flan_t5_xl",
+      "label_source_name": "FLAN-T5 XL",
+      "label_archive_member": "./classifier/data/musique_hotpot_wiki2_nq_tqa_sqd/flan_t5_xl/silver/train.json"
+    },
+    {
+      "n": 254,
+      "question_id_sha256": "5394ef46ff3258414381a87ce6a03d9abcc399ed4b9cc4847dae57227d2b7fae",
+      "metric_question_id_sha256": {
+        "auto_label_f1": "5394ef46ff3258414381a87ce6a03d9abcc399ed4b9cc4847dae57227d2b7fae",
+        "oracle_f1": "5394ef46ff3258414381a87ce6a03d9abcc399ed4b9cc4847dae57227d2b7fae",
+        "regret": "5394ef46ff3258414381a87ce6a03d9abcc399ed4b9cc4847dae57227d2b7fae",
+        "agreement": "5394ef46ff3258414381a87ce6a03d9abcc399ed4b9cc4847dae57227d2b7fae",
+        "cost_agreement": "5394ef46ff3258414381a87ce6a03d9abcc399ed4b9cc4847dae57227d2b7fae"
+      },
+      "optimal_agreement_percent": 78.34645669291339,
+      "auto_label_mean_f1": 0.6687795275590551,
+      "oracle_mean_f1": 0.8215354330708661,
+      "mean_f1_regret": 0.152755905511811,
+      "cost_aware_agreement_percent": 61.811023622047244,
+      "all_zero_questions": 21,
+      "model_alias": "gemma-small",
+      "model": "Gemma 12B",
+      "label_source": "flan_t5_xxl",
+      "label_source_name": "FLAN-T5 XXL",
+      "label_archive_member": "./classifier/data/musique_hotpot_wiki2_nq_tqa_sqd/flan_t5_xxl/silver/train.json"
+    },
+    {
+      "n": 262,
+      "question_id_sha256": "51a15bf30ca44596faf2cf70e75f9ef29f66b44751d3e9981a603537cd0c3d03",
+      "metric_question_id_sha256": {
+        "auto_label_f1": "51a15bf30ca44596faf2cf70e75f9ef29f66b44751d3e9981a603537cd0c3d03",
+        "oracle_f1": "51a15bf30ca44596faf2cf70e75f9ef29f66b44751d3e9981a603537cd0c3d03",
+        "regret": "51a15bf30ca44596faf2cf70e75f9ef29f66b44751d3e9981a603537cd0c3d03",
+        "agreement": "51a15bf30ca44596faf2cf70e75f9ef29f66b44751d3e9981a603537cd0c3d03",
+        "cost_agreement": "51a15bf30ca44596faf2cf70e75f9ef29f66b44751d3e9981a603537cd0c3d03"
+      },
+      "optimal_agreement_percent": 67.17557251908397,
+      "auto_label_mean_f1": 0.5633969465648856,
+      "oracle_mean_f1": 0.8073664122137405,
+      "mean_f1_regret": 0.24396946564885497,
+      "cost_aware_agreement_percent": 59.92366412213741,
+      "all_zero_questions": 26,
+      "model_alias": "gemma-small",
+      "model": "Gemma 12B",
+      "label_source": "gpt",
+      "label_source_name": "GPT",
+      "label_archive_member": "./classifier/data/musique_hotpot_wiki2_nq_tqa_sqd/gpt/silver/train.json"
+    },
+    {
+      "n": 241,
+      "question_id_sha256": "9ad2ea3b077469b8255c2ee9275352ac0d557922abe3d9913022147ca5c5935a",
+      "metric_question_id_sha256": {
+        "auto_label_f1": "9ad2ea3b077469b8255c2ee9275352ac0d557922abe3d9913022147ca5c5935a",
+        "oracle_f1": "9ad2ea3b077469b8255c2ee9275352ac0d557922abe3d9913022147ca5c5935a",
+        "regret": "9ad2ea3b077469b8255c2ee9275352ac0d557922abe3d9913022147ca5c5935a",
+        "agreement": "9ad2ea3b077469b8255c2ee9275352ac0d557922abe3d9913022147ca5c5935a",
+        "cost_agreement": "9ad2ea3b077469b8255c2ee9275352ac0d557922abe3d9913022147ca5c5935a"
+      },
+      "optimal_agreement_percent": 81.32780082987551,
+      "auto_label_mean_f1": 0.7538174273858921,
+      "oracle_mean_f1": 0.8890871369294606,
+      "mean_f1_regret": 0.13526970954356848,
+      "cost_aware_agreement_percent": 60.16597510373444,
+      "all_zero_questions": 15,
+      "model_alias": "gemma",
+      "model": "Gemma 31B",
+      "label_source": "flan_t5_xl",
+      "label_source_name": "FLAN-T5 XL",
+      "label_archive_member": "./classifier/data/musique_hotpot_wiki2_nq_tqa_sqd/flan_t5_xl/silver/train.json"
+    },
+    {
+      "n": 254,
+      "question_id_sha256": "5394ef46ff3258414381a87ce6a03d9abcc399ed4b9cc4847dae57227d2b7fae",
+      "metric_question_id_sha256": {
+        "auto_label_f1": "5394ef46ff3258414381a87ce6a03d9abcc399ed4b9cc4847dae57227d2b7fae",
+        "oracle_f1": "5394ef46ff3258414381a87ce6a03d9abcc399ed4b9cc4847dae57227d2b7fae",
+        "regret": "5394ef46ff3258414381a87ce6a03d9abcc399ed4b9cc4847dae57227d2b7fae",
+        "agreement": "5394ef46ff3258414381a87ce6a03d9abcc399ed4b9cc4847dae57227d2b7fae",
+        "cost_agreement": "5394ef46ff3258414381a87ce6a03d9abcc399ed4b9cc4847dae57227d2b7fae"
+      },
+      "optimal_agreement_percent": 82.67716535433071,
+      "auto_label_mean_f1": 0.7490551181102362,
+      "oracle_mean_f1": 0.8848425196850394,
+      "mean_f1_regret": 0.13578740157480315,
+      "cost_aware_agreement_percent": 62.20472440944882,
+      "all_zero_questions": 15,
+      "model_alias": "gemma",
+      "model": "Gemma 31B",
+      "label_source": "flan_t5_xxl",
+      "label_source_name": "FLAN-T5 XXL",
+      "label_archive_member": "./classifier/data/musique_hotpot_wiki2_nq_tqa_sqd/flan_t5_xxl/silver/train.json"
+    },
+    {
+      "n": 262,
+      "question_id_sha256": "51a15bf30ca44596faf2cf70e75f9ef29f66b44751d3e9981a603537cd0c3d03",
+      "metric_question_id_sha256": {
+        "auto_label_f1": "51a15bf30ca44596faf2cf70e75f9ef29f66b44751d3e9981a603537cd0c3d03",
+        "oracle_f1": "51a15bf30ca44596faf2cf70e75f9ef29f66b44751d3e9981a603537cd0c3d03",
+        "regret": "51a15bf30ca44596faf2cf70e75f9ef29f66b44751d3e9981a603537cd0c3d03",
+        "agreement": "51a15bf30ca44596faf2cf70e75f9ef29f66b44751d3e9981a603537cd0c3d03",
+        "cost_agreement": "51a15bf30ca44596faf2cf70e75f9ef29f66b44751d3e9981a603537cd0c3d03"
+      },
+      "optimal_agreement_percent": 70.99236641221374,
+      "auto_label_mean_f1": 0.6555725190839694,
+      "oracle_mean_f1": 0.8876717557251909,
+      "mean_f1_regret": 0.2320992366412214,
+      "cost_aware_agreement_percent": 63.358778625954194,
+      "all_zero_questions": 17,
+      "model_alias": "gemma",
+      "model": "Gemma 31B",
+      "label_source": "gpt",
+      "label_source_name": "GPT",
+      "label_archive_member": "./classifier/data/musique_hotpot_wiki2_nq_tqa_sqd/gpt/silver/train.json"
+    }
+  ],
+  "full_500_oracle_mean_f1": {
+    "gemma-small": 0.5937,
+    "gemma": 0.6710600000000001
+  }
+}

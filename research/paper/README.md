@@ -6,7 +6,7 @@ This directory contains the living experimental record for **Model-Aware Adaptiv
 
 1. **Phase 0 — Reproduction and label validity:** reproduce the original evaluation, run strategies A/B/C on identical questions, construct empirical oracles, and analyze agreement, ties, and regret.
 2. **Phase 1 — Model profiling:** measure retrieval gains separately for LLM 1 and LLM 2.
-3. **Phase 2 — Method construction:** build the Retrieval Gain Matrix and the model-aware router.
+3. **Phase 2 — Method construction:** export the original classifier's A/B/C probability vectors and build one distance-weighted KNN retrieval-gain calibrator per target LLM.
 4. **Phase 3 — Main evaluation:** compare fixed baselines, the original adaptive router, and the proposed method on quality and efficiency.
 5. **Phase 4 — Analysis:** measure calibration sample efficiency and perform component ablations.
 
@@ -18,7 +18,7 @@ This directory contains the living experimental record for **Model-Aware Adaptiv
 - **Table 3:** model-specific gains from single-step and multi-step retrieval.
 - **Table 4:** main answer-quality and retrieval-efficiency comparison.
 - **Table 5:** transfer of router profiles across LLMs and model-specific adaptation.
-- **Table 6:** ablations of question features, model profiles, and cost-aware selection.
+- **Table 6:** calibration-size and optional cost-aware-utility ablations for the distance-weighted KNN method.
 
 The separate configuration table in `main.tex` records model versions, generation settings, retrieval settings, serving conditions, and the evaluation-code revision.
 
