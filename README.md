@@ -60,3 +60,4 @@ Because upstream still stores its files at repository root while this project st
 ## Reproducibility boundary
 
 Baseline reproduction should use the unmodified contents of `adaptive-rag/` and record the upstream/project commit, command, configuration, environment, model version, and dataset split. Research-specific code and outputs should be added only under `research/`. Large corpora, predictions, indices, checkpoints, generated LaTeX files, and credentials are intentionally excluded from version control.
+# Model-Aware-Adaptive-RAG
