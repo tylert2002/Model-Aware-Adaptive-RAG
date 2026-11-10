@@ -1,19 +1,19 @@
 \begin{table}[H]
 \centering
-\caption{Ablation of question features, model profiles, and cost-aware selection in model-aware routing.}
+\caption{Calibration-size and utility ablations for Probability-Space Retrieval Gain Calibration.}
 \label{tab:ablation}
 \small
 \begin{adjustbox}{max width=\textwidth}
 \begin{tabular}{@{}lcccccc@{}}
 \toprule
-Method Variant & Question Features & Model Profile & Cost-Aware Selection & F1 (\%) & Mean F1 Regret & Avg. Retrieval Calls \\
+Method Variant & Probability Features & Gain Calibration & Cost Penalty & F1 (\%) & Mean F1 Regret & Avg. Retrieval Calls \\
 \midrule
-Question-only routing & \yes & \no & \no & \NA & \NA & \NA \\
-Model-profile-only routing & \no & \yes & \no & \NA & \NA & \NA \\
-Question + Model Profile & \yes & \yes & \no & \NA & \NA & \NA \\
-Question + Model Profile + Cost Awareness (Full Method) & \yes & \yes & \yes & \NA & \NA & \NA \\
+Original Adaptive-RAG argmax & \yes & \no & \no & \NA & \NA & \NA \\
+Distance-weighted KNN (smaller calibration subset) & \yes & \yes & \no & \NA & \NA & \NA \\
+Distance-weighted KNN (full calibration set) & \yes & \yes & \no & \NA & \NA & \NA \\
+Distance-weighted KNN + cost-aware utility & \yes & \yes & \yes & \NA & \NA & \NA \\
 \bottomrule
 \end{tabular}
 \end{adjustbox}
-\TableNote{\yes{} indicates an enabled component and \no{} a disabled component. Cost-aware selection must use the same pre-registered quality-equivalence and cost definitions as the oracle analysis. All variants must be implementable without access to test answers at routing time.}
+\TableNote{Pending: dataset, calibration/validation/test splits, calibration-subset $N$, and held-out-test $N$ are not finalized; no result denominator is claimed. Future rows must state exact unique-question $N$ for each nested calibration subgroup and use the same held-out IDs for all metrics. \yes/\no{} mark components; tuning excludes test data, and the Oracle is not an ablation row.}
 \end{table}

@@ -1,44 +1,27 @@
 \begin{table}[H]
 \centering
-\caption{Dataset statistics and evaluation conditions for the repository-supported single-hop and multi-hop QA benchmarks.}
+\caption{Dataset Characteristics and Experimental Allocation for the HotpotQA and SQuAD Evaluations.}
 \label{tab:datasets}
-\small
-\begin{adjustbox}{max width=\textwidth}
-\begin{tabular}{@{}llccccccl@{}}
+\scriptsize
+\setlength{\tabcolsep}{4pt}
+\begin{tabularx}{\textwidth}{@{}
+>{\raggedright\arraybackslash}p{1.45cm}
+>{\raggedright\arraybackslash}p{1.45cm}
+>{\hsize=1.4\hsize\linewidth=\hsize\raggedright\arraybackslash}X
+>{\hsize=1.0\hsize\linewidth=\hsize\raggedright\arraybackslash}X
+>{\hsize=0.8\hsize\linewidth=\hsize\centering\arraybackslash}X
+>{\hsize=0.8\hsize\linewidth=\hsize\centering\arraybackslash}X
+>{\raggedright\arraybackslash}p{1.65cm}@{}}
 \toprule
-Dataset & Question Type & Total Questions & Calibration Questions & Validation Questions & Test Questions & Retrieval Corpus & Evaluation Metric \\
+\multicolumn{3}{c}{\textbf{Dataset characteristics}} &
+\multicolumn{3}{c}{\textbf{Our experimental allocation}} &
+\multicolumn{1}{c}{\textbf{Retrieval}} \\
+\cmidrule(lr){1-3}\cmidrule(lr){4-6}\cmidrule(l){7-7}
+Dataset & Question Type & Available Questions & Phase 0 & Calibration & Held-out Test & Retrieval Corpus \\
 \midrule
-Natural Questions & Single-hop & \NA & \NA & \NA & \NA & Wikipedia passages & Token F1 / Exact Match \\
-TriviaQA & Single-hop & \NA & \NA & \NA & \NA & Wikipedia passages & Token F1 / Exact Match \\
-SQuAD & Single-hop & \NA & \NA & \NA & \NA & Wikipedia passages & Token F1 / Exact Match \\
-\midrule
-HotpotQA & Multi-hop & \NA & \NA & \NA & \NA & HotpotQA index & Token F1 / Exact Match \\
-2WikiMultiHopQA & Multi-hop & \NA & \NA & \NA & \NA & 2WikiMultiHopQA index & Token F1 / Exact Match \\
-MuSiQue & Multi-hop & \NA & \NA & \NA & \NA & MuSiQue index & Token F1 / Exact Match \\
-\bottomrule
-\end{tabular}
-\end{adjustbox}
-\TableNote{Dataset support and corpus names are confirmed from the original repository documentation. Counts remain unset until split manifests are frozen. ``Single-hop'' and ``Multi-hop'' reflect the repository's dataset grouping, not a new per-question annotation.}
-
-\vspace{8pt}
-\textbf{Experimental configuration}
-\vspace{3pt}
-
-\begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}X@{}}
-\toprule
-Setting & Recorded value \\
-\midrule
-LLM 1 name and version & \NA \\
-LLM 2 name and version & \NA \\
-Decoding parameters & \NA \\
-Maximum generated tokens & \NA \\
-Prompt/template version & \NA \\
-Retriever and index version & \NA \\
-Top-$k$ / stopping rule & \NA \\
-Multi-step maximum steps & \NA \\
-Hardware / serving setup & \NA \\
-Evaluation code revision & \NA \\
+HotpotQA & Multi-hop & 1,000 (two disjoint local subsets) & 500 unique (complete) & 50 frozen & 150 frozen & \texttt{hotpotqa} index \\
+SQuAD & Single-hop & 500 (local development subset) & Planned (pending) & TBD & TBD & \texttt{wiki} index \\
 \bottomrule
 \end{tabularx}
-\TableNote{Record immutable model identifiers where possible. Generation and retrieval settings must be fixed within each comparison.}
+\TableNote{HotpotQA has 500 unique IDs in each disjoint repository-local \texttt{dev\_500\_subsampled.jsonl} and archived \texttt{test\_subsampled.jsonl}. Phase~0 covers all 500 development IDs under both models and A/B/C (3,000 inference records). Frozen calibration/validation/test manifests contain 50/25/150 unique IDs from the latter subset, are mutually disjoint, and exclude Phase~0. The existing 5,233,329-document \texttt{hotpotqa} index and A/B/C retrieval path passed calibration smoke tests. E0.0 remains in progress because the upstream reader cannot directly consume the answer-free, context-free inference files. SQuAD remains pending and unchanged.}
 \end{table}

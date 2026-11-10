@@ -15,16 +15,16 @@ LLM & Routing Method & F1 (\%) & Exact Match (\%) & Avg. Retrieval Calls & Avg. 
 & Always Single-step Retrieval & \NA & \NA & \NA & \NA & \NA \\
 & Always Multi-step Retrieval & \NA & \NA & \NA & \NA & \NA \\
 & Original Adaptive-RAG & \NA & \NA & \NA & \NA & \NA \\
-& Proposed \ours & \NA & \NA & \NA & \NA & \NA \\
+& \ours{} (distance-weighted KNN) & \NA & \NA & \NA & \NA & \NA \\
 \midrule
 \multirow{5}{*}{LLM 2}
 & No Retrieval & \NA & \NA & \NA & \NA & \NA \\
 & Always Single-step Retrieval & \NA & \NA & \NA & \NA & \NA \\
 & Always Multi-step Retrieval & \NA & \NA & \NA & \NA & \NA \\
 & Original Adaptive-RAG & \NA & \NA & \NA & \NA & \NA \\
-& Proposed \ours & \NA & \NA & \NA & \NA & \NA \\
+& \ours{} (distance-weighted KNN) & \NA & \NA & \NA & \NA & \NA \\
 \bottomrule
 \end{tabular}
 \end{adjustbox}
-\TableNote{Define the cost column's scope before collection: retrieval cost, model-inference cost, and total API cost are distinct and must not be conflated. Report the chosen scope and price date; latency should use a fixed measurement protocol and comparable serving conditions.}
+\TableNote{Pending: dataset, held-out split, and unique-question $N$ are not yet frozen; no displayed row has results. Future rows within an LLM block must use the identical held-out IDs and report that common $N$; question counts must remain distinct from method inference records. The Oracle is excluded as non-deployable. Cost scope, price date, and latency protocol must be fixed before reporting.}
 \end{table}

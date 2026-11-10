@@ -1,12 +1,12 @@
 # Experiment Plan
 
-This is the operational roadmap for Model-Aware Adaptive-RAG. The stable publication-facing table shells live in `../paper/tables/`; this document records dependencies and expected artifacts without claiming results.
+This is the operational roadmap for Probability-Space Retrieval Gain Calibration. The stable publication-facing table shells live in `../paper/tables/`; this document records dependencies and expected artifacts without claiming results. The evidence-backed repository inventory and missing-data checklist are in `PROBABILITY_SPACE_CALIBRATION_AUDIT.md`.
 
 ## Pilot prerequisite — feasibility and pipeline validation
 
 | ID | Experiment | Expected deliverable | Result table / figure | Status |
 |---|---|---|---|---|
-| EP.1 | Pilot Model and Pipeline Validation | **Prerequisite:** NRP API compatibility and pipeline validation; preliminary A/B/C F1; API success/failure statistics; runtime and token-usage summary | P1 | Complete |
+| EP.1 | Pilot Model and Pipeline Validation | **Prerequisite:** NRP API compatibility and pipeline validation; preliminary A/B/C F1; API success/failure statistics; runtime and token-usage summary | P1 | Completed for HotpotQA; SQuAD Partial |
 
 EP.1 uses approximately 30–50 questions that are identical across candidate models and strategies A (No Retrieval), B (Single-step Retrieval), and C (Multi-step Retrieval). It verifies NRP-hosted LLM integration, strategy execution, answer generation, F1 evaluation, failure and timeout handling, retrieval errors, and runtime/resource feasibility before formal Phase 0 begins.
 
@@ -32,11 +32,11 @@ The NRP adapter defaults to one request at a time even though the current docume
 
 | ID | Experiment | Expected deliverable | Result table / figure | Status |
 |---|---|---|---|---|
-| E0.0 | Dataset and Evaluation Setup | **Direct:** frozen splits, corpus/index versions, and model, generation, retrieval, and evaluation configuration | T1 | Not Started |
-| E0.1 | Reproduce the original Adaptive-RAG evaluation | **Direct:** baseline metrics with exact command, environment, configuration, and run manifest | T4 | Not Started |
-| E0.2 | Evaluate A/B/C on the same questions | **Intermediate:** aligned per-question predictions, EM/F1, retrieval counts, and traces | Feeds T2–T4 | Not Started |
-| E0.3 | Compare automatic labels with empirical oracle strategies | **Direct:** quality-oracle sets, cost-aware choices, agreement, regret, and tie policy | T2 | Not Started |
-| E0.4 | Analyze disagreement, ties, and F1 regret | **Direct:** disagreement categories and per-question/aggregate regret analysis | T2; F1 | Not Started |
+| E0.0 | Dataset and Evaluation Setup | **Direct:** frozen disjoint calibration/validation/test splits, corpus/index versions, and model, generation, retrieval, and evaluation configuration | T1 | Partial |
+| E0.1 | Evaluate the original Adaptive-RAG router | **Direct:** original-router metrics and routing decisions with exact classifier checkpoint and run manifest | T4 | Pending |
+| E0.2 | Evaluate A/B/C on the same questions | **Intermediate:** aligned per-question predictions, EM/F1, retrieval counts, tokens, latency, and traces | Feeds T2–T4 | **Completed:** HotpotQA 500-question paired A/B/C evaluation for Gemma 12B and 31B |
+| E0.3 | Compute retrospective oracle upper bound | **Analytical only:** exact F1-optimal tie sets, oracle quality, and regret; never used for test routing | T2 | **Completed:** HotpotQA 500-question retrospective analysis |
+| E0.4 | Analyze original-router disagreement, ties, and F1 regret | **Direct:** disagreement categories and per-question/aggregate regret analysis | T2; F1 | Pending |
 
 Phase 0 must freeze question identifiers and use the same evaluator for all three strategies. Calibration, validation, and test questions must not overlap. The quality oracle contains every strategy tied for highest per-question F1; the cost-aware oracle selects the least expensive quality-equivalent strategy under a pre-registered cost definition.
 
@@ -44,8 +44,9 @@ Phase 0 must freeze question identifiers and use the same evaluator for all thre
 
 | ID | Experiment | Expected deliverable | Result table / figure | Status |
 |---|---|---|---|---|
-| E1.1 | Profile retrieval gains for LLM 1 | **Direct:** per-question and category-level retrieval-gain profile for LLM 1 | T3; F2 | Not Started |
-| E1.2 | Profile retrieval gains for LLM 2 | **Direct:** per-question and category-level retrieval-gain profile for LLM 2 | T3; F2 | Not Started |
+| E1.1 | Profile retrieval gains for Gemma 12B | **Direct:** per-question `F1_B-F1_A` and `F1_C-F1_A` with provenance | T3; F2 | Partial: pilot gains derivable offline |
+| E1.2 | Profile retrieval gains for Gemma 31B | **Direct:** per-question `F1_B-F1_A` and `F1_C-F1_A` with provenance | T3; F2 | Partial: pilot gains derivable offline |
+| E1.3 | Diagnose probability-space locality | **Direct:** whether nearby classifier probability vectors have similar target-LLM retrieval gains | T3; F2 | Pending |
 
 Both models must use identical held-out questions and compatible retrieval settings. Question categories must come from available annotations or a documented, frozen classification procedure.
 
@@ -53,8 +54,8 @@ Both models must use identical held-out questions and compatible retrieval setti
 
 | ID | Experiment | Expected deliverable | Result table / figure | Status |
 |---|---|---|---|---|
-| E2.1 | Construct the Retrieval Gain Matrix | **Intermediate:** versioned gain matrix with question, model, strategy, and provenance metadata | Feeds E2.2 and T4–T6 | Not Started |
-| E2.2 | Implement the model-aware retrieval router | **Intermediate:** tested router, specification, versioned profiles, and routing decisions | Feeds T4–T6 | Not Started |
+| E2.1 | Export original-classifier A/B/C probability vectors | **Intermediate:** separate immutable per-question logits/probabilities with checkpoint and tokenizer provenance | Feeds E2.2 and T3–T6 | Pending |
+| E2.2 | Implement Probability-Space Calibration | **Intermediate:** distance-weighted KNN over `[P(A),P(B),P(C)]`, using target-LLM-specific observed retrieval gains | Feeds T4–T6 | Pending |
 
 Shared research code belongs under `../src/`, while experiment-specific code belongs in the corresponding directory under `../experiments/`; the original Adaptive-RAG implementation remains unchanged.
 
@@ -62,9 +63,9 @@ Shared research code belongs under `../src/`, while experiment-specific code bel
 
 | ID | Experiment | Expected deliverable | Result table / figure | Status |
 |---|---|---|---|---|
-| E3.1 | Evaluate all baseline routing strategies | **Direct:** baseline quality, regret, retrieval-call, latency, cost, and routing outputs | T4–T5 | Not Started |
-| E3.2 | Evaluate the proposed method across LLMs | **Direct:** proposed-method metrics, routing traces, and cross-model calibration comparisons | T4–T5 | Not Started |
-| E3.3 | Compare answer quality and retrieval cost | **Direct:** quality–efficiency analysis with itemized and dated cost scope | T4; F3 | Not Started |
+| E3.1 | Evaluate fixed A/B/C and original-router baselines | **Direct:** quality, regret, retrieval-call, latency, token/cost, and routing outputs | T4–T5 | Pending |
+| E3.2 | Evaluate distance-weighted KNN across target LLMs | **Direct:** held-out proposed-method metrics and model-specific calibration comparisons | T4–T5 | Pending |
+| E3.3 | Compare answer quality and retrieval cost | **Direct:** quality–efficiency analysis with itemized and dated cost scope | T4; F3 | Pending |
 
 Use one frozen evaluation protocol. Retrieval cost, model-inference cost, and total API cost are separate quantities and must not be conflated.
 
@@ -72,8 +73,8 @@ Use one frozen evaluation protocol. Retrieval cost, model-inference cost, and to
 
 | ID | Experiment | Expected deliverable | Result table / figure | Status |
 |---|---|---|---|---|
-| E4.1 | Conduct calibration sample-efficiency experiments | **Direct:** quality, regret, and retrieval learning curves by calibration-set size | F4 | Not Started |
-| E4.2 | Perform ablation studies | **Direct:** component-level quality, regret, and retrieval metrics | T6 | Not Started |
+| E4.1 | Conduct calibration-size ablation | **Direct:** KNN quality, regret, and retrieval learning curves using nested calibration subsets | T6; F4 | Optional |
+| E4.2 | Evaluate cost-aware utility selection | **Direct:** same KNN gain estimates with a pre-registered retrieval-cost penalty | T6 | Optional |
 
 ## Result index
 
@@ -95,4 +96,4 @@ Use one frozen evaluation protocol. Retrieval cost, model-inference cost, and to
 
 For every completed row, archive or reference the code revision, immutable model identifier, prompt and generation settings, retriever/index version, split manifest, random seed where applicable, predictions, routing decisions, per-question metrics, retrieval calls, latency protocol, and cost scope. Update the corresponding file under `../paper/tables/` only after verifying the artifact. Missing measurements remain `--`.
 
-Allowed status values are **Not Started**, **In Progress**, **Blocked**, and **Complete**. Status describes artifact readiness, not whether a hypothesis was supported.
+Audit status values are **Completed**, **Partial**, **Pending**, and **Optional**. Status describes artifact readiness, not whether a hypothesis was supported. A pilot completion never implies completion of the formal held-out experiment.

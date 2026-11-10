@@ -1,0 +1,15 @@
+{
+  "generated_utc": "2026-11-06T10:13:35.782834+00:00",
+  "passed": true,
+  "models": 2,
+  "questions_per_model": 500,
+  "executions": 3000,
+  "question_id_sets_identical": true,
+  "duplicate_model_question_strategy_keys": 0,
+  "missing_model_question_strategy_keys": 0,
+  "failed_canonical_records": 0,
+  "historical_incomplete_attempts_excluded": {
+    "gemma-small": 237,
+    "gemma": 194
+  }
+}

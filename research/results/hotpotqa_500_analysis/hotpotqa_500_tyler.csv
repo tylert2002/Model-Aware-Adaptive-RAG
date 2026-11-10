@@ -1,0 +1,7 @@
+model_alias,model,strategy,n,mean_f1,mean_em,mean_retrieval_calls,mean_api_requests,mean_total_tokens,mean_latency_seconds,optimal_A_count,optimal_B_count,optimal_C_count,optimal_AB_count,optimal_AC_count,optimal_BC_count,optimal_ABC_count,all_failed_count
+gemma-small,Gemma 12B,A,500,0.280700,0.202000,0.000000,1.000000,1542.488,2.028940,61,41,104,9,15,88,182,118
+gemma-small,Gemma 12B,B,500,0.373320,0.288000,1.000000,1.000000,3148.700,2.147609,61,41,104,9,15,88,182,118
+gemma-small,Gemma 12B,C,500,0.462800,0.348000,9.590000,10.590000,32559.476,17.958399,61,41,104,9,15,88,182,118
+gemma,Gemma 31B,A,500,0.363300,0.250000,0.000000,1.000000,1536.638,6.200123,65,14,93,9,25,107,187,101
+gemma,Gemma 31B,B,500,0.397620,0.310000,1.000000,1.000000,3153.736,6.673711,65,14,93,9,25,107,187,101
+gemma,Gemma 31B,C,500,0.564420,0.440000,7.442000,8.442000,26133.198,49.146515,65,14,93,9,25,107,187,101

@@ -201,8 +201,12 @@ def main(argv: Sequence[str] | None = None) -> int:
     with upstream_import_context(paths.upstream_root):
         backends = build_upstream_backends(paths, args.dataset)
         example = read_selected_examples(backends["A"], paths.dataset_path, [selected_id])[0]
-    reference = example["answer"]
-    reference_answer = str(reference[0] if isinstance(reference, (list, tuple)) else reference)
+    reference = example.get("answer")
+    reference_answer = (
+        str(reference[0] if isinstance(reference, (list, tuple)) else reference)
+        if reference is not None
+        else "offline-mock-answer"
+    )
     adapter = DeterministicMockAdapter(reference_answer)
 
     paths.results_root.mkdir(parents=True, exist_ok=True)

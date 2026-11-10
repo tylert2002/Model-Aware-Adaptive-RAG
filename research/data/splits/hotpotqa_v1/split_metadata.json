@@ -1,0 +1,87 @@
+{
+  "dataset": "hotpotqa",
+  "files": {
+    "calibration.jsonl": {
+      "records": 50,
+      "sha256": "d387583b768319c91edb832502cfa78349a4957e6596c433b51d8c6179d59d9f"
+    },
+    "inference/calibration.jsonl": {
+      "records": 50,
+      "sha256": "0917e208cdaea7a429e3f922a12557c93982ccf1b1a1ab83f89df3ae67e9f585"
+    },
+    "inference/test.jsonl": {
+      "records": 150,
+      "sha256": "39383a6c70643e2465a65eea19e96714c0695f5a0fe9e7d18e7a1262ddc12c1f"
+    },
+    "inference/validation.jsonl": {
+      "records": 25,
+      "sha256": "bcffb56de3a6b15eb0b138c0c007ce320334b0c1749c634e293058f1e8f5bbe1"
+    },
+    "test.jsonl": {
+      "records": 150,
+      "sha256": "be530a7228aa8e0964ed70b56d4752f20d63f93ad30f0db769ca7726fdc0d4c2"
+    },
+    "validation.jsonl": {
+      "records": 25,
+      "sha256": "738d6508d57dae28179c039ae7611111ec27c01859ead046104bd7cad09b72d0"
+    }
+  },
+  "phase0_exclusion": {
+    "manifest_path": "research/results/hotpotqa_500_question_manifest_seed100.json",
+    "manifest_sha256": "a09e0e212ca1e18ba569d7fdf05de5af60691b5a0bc060d697448ca55d3a98d5",
+    "overlap": 0,
+    "question_ids": 500
+  },
+  "question_type_allocations": {
+    "calibration": {
+      "bridge": 41,
+      "comparison": 9
+    },
+    "test": {
+      "bridge": 124,
+      "comparison": 26
+    },
+    "validation": {
+      "bridge": 21,
+      "comparison": 4
+    }
+  },
+  "retrieval": {
+    "intended_corpus_alias": "hotpotqa",
+    "live_index_verified": false,
+    "reason": "localhost Elasticsearch was unavailable during generation",
+    "source_records_have_contexts": true
+  },
+  "schema_version": 1,
+  "seed": 20261109,
+  "selection": "Hamilton allocation by source question-type proportion; one seeded shuffle per sorted category; split order calibration, validation, test; records sorted by question_id",
+  "source": {
+    "archive_path": "adaptive-rag/processed_data.tar.gz",
+    "archive_sha256": "6482d1c567f7a9f169e96f01c1c5c85328026c8c8c88f2116f48482c2a1c7db9",
+    "member": "./processed_data/hotpotqa/test_subsampled.jsonl",
+    "member_sha256": "729d8987560092c8476523488069e6fb9bd1527157dc0d7bfebf3ddc336c558e",
+    "question_types": {
+      "bridge": 412,
+      "comparison": 88
+    },
+    "records": 500
+  },
+  "split_sizes": {
+    "calibration": 50,
+    "test": 150,
+    "validation": 25
+  },
+  "status": "candidate_frozen_pending_retrieval_runtime_verification",
+  "validation": {
+    "answers_absent_from_inference_safe_files": true,
+    "answers_present_in_evaluation_files": true,
+    "counts_valid": true,
+    "live_retrieval_compatibility_valid": false,
+    "phase0_disjoint": true,
+    "same_manifests_for_both_target_llms": true,
+    "source_schema_valid": true,
+    "splits_disjoint": true,
+    "unique_ids_valid": true
+  },
+  "version": "hotpotqa_v1"
+}

@@ -1,17 +1,23 @@
 \begin{table}[H]
 \centering
-\caption{Model-specific retrieval gains on shared held-out questions, grouped only by documented question categories.}
+\caption{HotpotQA Phase~0 Retrieval Gains on the 500-Question Local Development Set, Grouped by Documented Question Category.}
 \label{tab:retrieval-gain}
 \small
 \begin{adjustbox}{max width=\textwidth}
-\begin{tabular}{@{}llcccccl@{}}
+\begin{tabular}{@{}lllcccccl@{}}
 \toprule
-LLM & Question Category & No Retrieval F1 & Single-step F1 & Multi-step F1 & Single-step Gain & Multi-step Gain & Preferred Strategy \\
+Model & Category & $N$ & F1(A) & F1(B) & F1(C) & Gain(B$-$A) & Gain(C$-$A) & Preferred Strategy \\
 \midrule
-LLM 1 & \NA & \NA & \NA & \NA & \NA & \NA & \NA \\
-LLM 2 & \NA & \NA & \NA & \NA & \NA & \NA & \NA \\
+% TABLE3_ROWS_BEGIN
+Gemma 12B & Bridge & 396 & 0.201 & 0.299 & 0.405 & +0.098 & +0.204 & C \\
+Gemma 12B & Comparison & 104 & 0.584 & 0.657 & 0.682 & +0.073 & +0.099 & C \\
+Gemma 12B & Overall & 500 & 0.281 & 0.373 & 0.463 & +0.093 & +0.182 & C \\
+Gemma 31B & Bridge & 396 & 0.289 & 0.323 & 0.524 & +0.034 & +0.235 & C \\
+Gemma 31B & Comparison & 104 & 0.645 & 0.680 & 0.719 & +0.035 & +0.074 & C \\
+Gemma 31B & Overall & 500 & 0.363 & 0.398 & 0.564 & +0.034 & +0.201 & C \\
+% TABLE3_ROWS_END
 \bottomrule
 \end{tabular}
 \end{adjustbox}
-\TableNote{Single-step gain is $F1_B-F1_A$ and multi-step gain is $F1_C-F1_A$, computed on the same examples. Add rows only after documenting the annotation source or classification procedure; do not infer question categories from dataset names without justification.}
+\TableNote{$N$ is unique questions matched by exact ID to the HotpotQA \texttt{type} field: 396 bridge and 104 comparison; Overall contains all 500. Within each row, A/B/C F1 and gains use identical IDs from the completed Phase~0 development results. Preferred Strategy includes every strategy tied for the highest unrounded mean F1. Each model contributes 1,500 question--strategy inference records.}
 \end{table}

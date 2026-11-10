@@ -3,38 +3,38 @@
 \begingroup
 \captionsetup{labelsep=period}
 \renewcommand{\thetable}{P1}
-\caption{Pilot Study: Model and Pipeline Validation Across Datasets, Models, and Retrieval Strategies. Retrieval calls and total tokens characterize strategy cost.}
+\caption{Expanded Model and Pipeline Validation Across Datasets, Models, and Retrieval Strategies. HotpotQA reports the complete 500-question A/B/C evaluation; retrieval calls, API requests, and total tokens characterize strategy cost.}
 \label{tab:pilot-model-validation}
 \endgroup
 \scriptsize
 \setlength{\tabcolsep}{3pt}
 \renewcommand{\arraystretch}{1.08}
 \begin{adjustbox}{max width=\textwidth}
-\begin{tabular}{@{}lllccccccc@{}}
+\begin{tabular}{@{}lllcccccccc@{}}
 \toprule
-Dataset & Model & Strategy & $N$ & Completion (\%) & Mean F1 & Mean EM & Mean Retrieval Calls & Mean Total Tokens & Mean Latency (s) \\
+Dataset & Model & Strategy & $N$ & Completion (\%) & Mean F1 & Mean EM & Mean Retrieval Calls & Mean API Requests & Mean Total Tokens & Mean Latency (s) \\
 \midrule
 \multirow{6}{*}{HotpotQA}
- & \multirow{3}{*}{Gemma 12B} & A & 30 & 100.0 & 0.137 & 0.100 & 0.000 & 1,552.633 & 1.983 \\
- & & B & 30 & 100.0 & 0.278 & 0.233 & 1.000 & 3,159.367 & 2.365 \\
- & & C & 30 & 100.0 & 0.446 & 0.367 & 9.500 & 32,396.233 & 17.006 \\
-\cmidrule(lr){2-10}
- & \multirow{3}{*}{Gemma 31B} & A & 30 & 100.0 & 0.167 & 0.133 & 0.000 & 1,547.933 & 1.385 \\
- & & B & 30 & 100.0 & 0.272 & 0.233 & 1.000 & 3,167.600 & 1.715 \\
- & & C & 30 & 100.0 & 0.486 & 0.400 & 7.433 & 26,192.100 & 11.427 \\
+ & \multirow{3}{*}{Gemma 12B} & A & 500 & 100.0 & 0.281 & 0.202 & 0.000 & 1.000 & 1,542.488 & 2.029 \\
+ & & B & 500 & 100.0 & 0.373 & 0.288 & 1.000 & 1.000 & 3,148.700 & 2.148 \\
+ & & C & 500 & 100.0 & 0.463 & 0.348 & 9.590 & 10.590 & 32,559.476 & 17.958 \\
+\cmidrule(lr){2-11}
+ & \multirow{3}{*}{Gemma 31B} & A & 500 & 100.0 & 0.363 & 0.250 & 0.000 & 1.000 & 1,536.638 & 6.200 \\
+ & & B & 500 & 100.0 & 0.398 & 0.310 & 1.000 & 1.000 & 3,153.736 & 6.674 \\
+ & & C & 500 & 100.0 & 0.564 & 0.440 & 7.442 & 8.442 & 26,133.198 & 49.147 \\
 \midrule
 \multirow{6}{*}{SQuAD}
- & \multirow{3}{*}{Gemma 12B} & A & \NA & \NA & \NA & \NA & \NA & \NA & \NA \\
- & & B & \NA & \NA & \NA & \NA & \NA & \NA & \NA \\
- & & C & \NA & \NA & \NA & \NA & \NA & \NA & \NA \\
-\cmidrule(lr){2-10}
- & \multirow{3}{*}{Gemma 31B} & A & \NA & \NA & \NA & \NA & \NA & \NA & \NA \\
- & & B & \NA & \NA & \NA & \NA & \NA & \NA & \NA \\
- & & C & \NA & \NA & \NA & \NA & \NA & \NA & \NA \\
+ & \multirow{3}{*}{Gemma 12B} & A & \NA & \NA & \NA & \NA & \NA & \NA & \NA & \NA \\
+ & & B & \NA & \NA & \NA & \NA & \NA & \NA & \NA & \NA \\
+ & & C & \NA & \NA & \NA & \NA & \NA & \NA & \NA & \NA \\
+\cmidrule(lr){2-11}
+ & \multirow{3}{*}{Gemma 31B} & A & \NA & \NA & \NA & \NA & \NA & \NA & \NA & \NA \\
+ & & B & \NA & \NA & \NA & \NA & \NA & \NA & \NA & \NA \\
+ & & C & \NA & \NA & \NA & \NA & \NA & \NA & \NA & \NA \\
 \bottomrule
 \end{tabular}
 \end{adjustbox}
-\TableNote{$N$ is the number of completed questions for the indicated dataset--model--strategy row. All means are computed over completed runs only; completion rate reports completed executions as a percentage of expected executions. A denotes No Retrieval, B Single-step Retrieval, and C Multi-step Retrieval. Mean latency is end-to-end wall-clock time per completed execution.}
-\TableNote{HotpotQA uses 30 deterministically selected development questions per model (seed 100), identical across models and strategies. Total tokens include reported input and output tokens. SQuAD measurements remain pending. These pilot measurements validate feasibility and are not formal test results.}
+\TableNote{$N$ is unique questions in each dataset--model--strategy row. HotpotQA Phase~0 uses the same 500 local-development IDs for every displayed comparison: 500 records per row, 1,500 per model, and 3,000 question--model--strategy records total. Completion is relative to those expected records; SQuAD remains pending with no completed metric denominator.}
+\TableNote{A, B, and C denote No, Single-step, and Multi-step Retrieval. Means use the row's same 500 IDs; API requests are LLM calls, total tokens are input plus output, and latency is end-to-end per inference record. These development results are not an untouched held-out test.}
 \end{table}
 \addtocounter{table}{-1}
