@@ -1,0 +1,19 @@
+{
+  "branch": "tyler/gemma31b-formal-ab",
+  "base_commit": "755ac6b49dc2d3c611438bbeec1663564764ac83",
+  "preflight_branch": "tylertran",
+  "note": "Preflight preceded creation of the isolated local feature branch; same base commit. Runner source captured while inference was running; no decoding/retrieval/prompt/scorer code changed.",
+  "runner_source_sha256": "eb4b36d07288eb2aa6dea7eb5d504c72067f3c36f6fc9fa9dcf24acf50bf8c10",
+  "files": {
+    "research/experiments/formal/gemma31b_ab.py": "eb4b36d07288eb2aa6dea7eb5d504c72067f3c36f6fc9fa9dcf24acf50bf8c10",
+    "research/experiments/formal/evaluate_gemma31b_ab.py": "c7c43fe1fc96a763dfac1f56c2364d33cb32d1fe3df2af0efaef7238669e875b",
+    "research/experiments/formal/test_gemma31b_ab.py": "e8b2687458ed966a581297a071782835083fcb5d26a9ef7e59c64047ae1b686d"
+  },
+  "execution_commands": [
+    "adaptive-rag/.venv/bin/python research/experiments/formal/gemma31b_ab.py preflight",
+    "adaptive-rag/.venv/bin/python research/experiments/formal/gemma31b_ab.py run"
+  ],
+  "resume_command": "adaptive-rag/.venv/bin/python research/experiments/formal/gemma31b_ab.py run",
+  "evaluation_command": "PYTHONPYCACHEPREFIX=.pilot-cache/pycache adaptive-rag/.venv/bin/python research/experiments/formal/evaluate_gemma31b_ab.py",
+  "no_push_or_pr": true
+}

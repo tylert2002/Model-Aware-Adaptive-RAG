@@ -1,0 +1,10 @@
+{
+  "status": "COMPLETE",
+  "records": 450,
+  "unique_questions": 225,
+  "A": 225,
+  "B": 225,
+  "official_test_n_per_strategy": 150,
+  "checks": "Frozen split/order/model alignment, A/B pairing, reference join, original-score recomputation, exact export equality, independent aggregate recomputation, zero Phase 0 overlap. Full raw-prompt provenance is certified separately by validation_report.json.",
+  "validator_sha256": "c383b7f38196566806baa80b7f7e96129a0790e4ecef42c6a8167cb1e0fa587b"
+}

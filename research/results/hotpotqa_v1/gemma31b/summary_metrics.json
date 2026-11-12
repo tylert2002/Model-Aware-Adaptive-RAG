@@ -1,0 +1,178 @@
+{
+  "status": "COMPLETE",
+  "expected_records": 450,
+  "valid_records": 450,
+  "unique_questions": 225,
+  "model": "google/gemma-4-31B-it-qat-w4a16-ct",
+  "reused_pilot_records": 4,
+  "new_records": 446,
+  "official_test_n_per_strategy": 150,
+  "splits": {
+    "calibration": {
+      "A": {
+        "n": 50,
+        "mean_f1": 0.34120000000000006,
+        "mean_em": 0.2,
+        "mean_latency_seconds": 1.4577589474999997,
+        "mean_end_to_end_latency_seconds": 1.5058101674000006,
+        "mean_retrieval_calls": 0.0,
+        "mean_llm_api_calls": 1.0,
+        "total_api_calls": 50,
+        "total_input_tokens": 74396,
+        "total_output_tokens": 2796,
+        "total_tokens": 77192,
+        "total_retries": 0,
+        "total_http_attempts": 50,
+        "total_retrieval_calls": 0,
+        "total_latency_seconds": 72.88794737499998,
+        "total_end_to_end_latency_seconds": 75.29050837000003,
+        "failed_executions": 0,
+        "finish_reasons": {
+          "stop": 49,
+          "length": 1
+        }
+      },
+      "B": {
+        "n": 50,
+        "mean_f1": 0.363,
+        "mean_em": 0.24,
+        "mean_latency_seconds": 1.71780664656,
+        "mean_end_to_end_latency_seconds": 1.9578701541400014,
+        "mean_retrieval_calls": 1.0,
+        "mean_llm_api_calls": 1.0,
+        "total_api_calls": 50,
+        "total_input_tokens": 152784,
+        "total_output_tokens": 3318,
+        "total_tokens": 156102,
+        "total_retries": 0,
+        "total_http_attempts": 50,
+        "total_retrieval_calls": 50,
+        "total_latency_seconds": 85.890332328,
+        "total_end_to_end_latency_seconds": 97.89350770700007,
+        "failed_executions": 0,
+        "finish_reasons": {
+          "stop": 50
+        }
+      }
+    },
+    "validation": {
+      "A": {
+        "n": 25,
+        "mean_f1": 0.512,
+        "mean_em": 0.4,
+        "mean_latency_seconds": 1.4185177499200028,
+        "mean_end_to_end_latency_seconds": 1.4688648965600009,
+        "mean_retrieval_calls": 0.0,
+        "mean_llm_api_calls": 1.0,
+        "total_api_calls": 25,
+        "total_input_tokens": 37170,
+        "total_output_tokens": 1291,
+        "total_tokens": 38461,
+        "total_retries": 0,
+        "total_http_attempts": 25,
+        "total_retrieval_calls": 0,
+        "total_latency_seconds": 35.46294374800007,
+        "total_end_to_end_latency_seconds": 36.721622414000024,
+        "failed_executions": 0,
+        "finish_reasons": {
+          "stop": 24,
+          "length": 1
+        }
+      },
+      "B": {
+        "n": 25,
+        "mean_f1": 0.43200000000000005,
+        "mean_em": 0.36,
+        "mean_latency_seconds": 1.6830372567199958,
+        "mean_end_to_end_latency_seconds": 1.870648965160001,
+        "mean_retrieval_calls": 1.0,
+        "mean_llm_api_calls": 1.0,
+        "total_api_calls": 25,
+        "total_input_tokens": 76877,
+        "total_output_tokens": 1558,
+        "total_tokens": 78435,
+        "total_retries": 0,
+        "total_http_attempts": 25,
+        "total_retrieval_calls": 25,
+        "total_latency_seconds": 42.0759314179999,
+        "total_end_to_end_latency_seconds": 46.76622412900002,
+        "failed_executions": 0,
+        "finish_reasons": {
+          "stop": 25
+        }
+      }
+    },
+    "test": {
+      "A": {
+        "n": 150,
+        "mean_f1": 0.34019999999999995,
+        "mean_em": 0.24666666666666667,
+        "mean_latency_seconds": 1.6352427052666685,
+        "mean_end_to_end_latency_seconds": 1.6809114155399998,
+        "mean_retrieval_calls": 0.0,
+        "mean_llm_api_calls": 1.0,
+        "total_api_calls": 150,
+        "total_input_tokens": 223007,
+        "total_output_tokens": 7258,
+        "total_tokens": 230265,
+        "total_retries": 1,
+        "total_http_attempts": 151,
+        "total_retrieval_calls": 0,
+        "total_latency_seconds": 245.28640579000026,
+        "total_end_to_end_latency_seconds": 252.13671233099998,
+        "failed_executions": 0,
+        "finish_reasons": {
+          "stop": 148,
+          "length": 2
+        }
+      },
+      "B": {
+        "n": 150,
+        "mean_f1": 0.33526666666666666,
+        "mean_em": 0.24666666666666667,
+        "mean_latency_seconds": 1.8346757172133372,
+        "mean_end_to_end_latency_seconds": 1.9873861005800033,
+        "mean_retrieval_calls": 1.0,
+        "mean_llm_api_calls": 1.0,
+        "total_api_calls": 150,
+        "total_input_tokens": 463377,
+        "total_output_tokens": 8958,
+        "total_tokens": 472335,
+        "total_retries": 0,
+        "total_http_attempts": 150,
+        "total_retrieval_calls": 150,
+        "total_latency_seconds": 275.2013575820006,
+        "total_end_to_end_latency_seconds": 298.1079150870005,
+        "failed_executions": 0,
+        "finish_reasons": {
+          "stop": 150
+        }
+      }
+    }
+  },
+  "execution_statistics": {
+    "failed_executions": 0,
+    "formal_http_attempts_observed": 447,
+    "failed_http_attempts_observed": 1,
+    "total_included_api_calls": 450,
+    "total_included_http_attempts": 451,
+    "retries_in_successful_records": 1,
+    "input_tokens": 1027611,
+    "output_tokens": 25179,
+    "total_tokens": 1052790,
+    "total_recorded_api_latency_seconds": 756.8049182410008,
+    "total_recorded_end_to_end_latency_seconds": 806.9164900380005,
+    "preflight_connectivity_excluded_from_scored_records": {
+      "model": "google/gemma-4-31B-it-qat-w4a16-ct",
+      "text": "OK",
+      "status": "ok",
+      "latency_seconds": 0.6773650840000001,
+      "input_tokens": 17,
+      "output_tokens": 2,
+      "total_tokens": 19,
+      "finish_reason": "stop",
+      "request_id": "chatcmpl-1aa7c698-3cdd-956e-a108-5f2f91a2dbf1",
+      "attempts": 1
+    }
+  }
+}

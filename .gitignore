@@ -69,3 +69,10 @@ research/paper/*.pdf
 /research/results/pilot/20261112T054914Z_gemma_b89bcbfd/traces/
 /research/results/pilot/20261112T054914Z_gemma_b89bcbfd/results.jsonl
 /research/results/pilot/20261112T054914Z_gemma_b89bcbfd/scored_results.jsonl
+
+# E1 formal inference: keep raw traces and resumable runtime state local
+/research/results/hotpotqa_v1/gemma31b/raw/
+/research/results/hotpotqa_v1/gemma31b/checkpoints/
+/research/results/hotpotqa_v1/gemma31b/run.lock
+/research/results/hotpotqa_v1/gemma31b/events.jsonl
+/research/results/hotpotqa_v1/gemma31b/failures.jsonl

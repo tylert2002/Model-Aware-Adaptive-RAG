@@ -1,0 +1,31 @@
+--- a/research/paper/tables/table0_progress.tex
++++ b/research/paper/tables/table0_progress.tex
+@@ -21,6 +21,7 @@
+ E0.3 & Oracle upper-bound analysis & \textit{Analytical only:} retrospective best-F1 tie sets, quality, and regret; never used for test routing & T2a & Completed & Suzy Huang \\
+ E0.4 & Audit silver labels, ties, and F1 regret & \textit{Direct:} provenance, overlap, agreement, and matched-subset regret analysis & T2b & Completed & Suzy Huang \\
+ \midrule
++E1.AB & Gemma 31B frozen A/B inference & \textit{Direct:} 450 validated records on 225 frozen questions; held-out A/B baselines ($n=150$ each) & T4; E1 report & Completed (A/B only) & Tyler Tran \\
+ E1.1 & Profile retrieval gains for LLM 1 & \textit{Direct:} per-question $F1_B-F1_A$ and $F1_C-F1_A$ & T3 & Completed (Phase~0) & Suzy Huang \\
+ E1.2 & Profile retrieval gains for LLM 2 & \textit{Direct:} per-question $F1_B-F1_A$ and $F1_C-F1_A$ & T3 & Completed (Phase~0) & Suzy Huang \\
+ E1.3 & Diagnose probability-space locality & \textit{Direct:} classifier-probability distance versus retrieval-gain similarity & T3; F2 & Planned & \\
+--- a/research/paper/tables/table4_main_results.tex
++++ b/research/paper/tables/table4_main_results.tex
+@@ -17,14 +17,14 @@
+ & Original Adaptive-RAG & \NA & \NA & \NA & \NA & \NA \\
+ & \ours{} (distance-weighted KNN) & \NA & \NA & \NA & \NA & \NA \\
+ \midrule
+-\multirow{5}{*}{LLM 2}
+-& No Retrieval & \NA & \NA & \NA & \NA & \NA \\
+-& Always Single-step Retrieval & \NA & \NA & \NA & \NA & \NA \\
++\multirow{5}{*}{Gemma 31B}
++& No Retrieval & 34.02 & 24.67 & 0.00 & 1.681 & \NA \\
++& Always Single-step Retrieval & 33.53 & 24.67 & 1.00 & 1.987 & \NA \\
+ & Always Multi-step Retrieval & \NA & \NA & \NA & \NA & \NA \\
+ & Original Adaptive-RAG & \NA & \NA & \NA & \NA & \NA \\
+ & \ours{} (distance-weighted KNN) & \NA & \NA & \NA & \NA & \NA \\
+ \bottomrule
+ \end{tabular}
+ \end{adjustbox}
+-\TableNote{Pending: dataset, held-out split, and unique-question $N$ are not yet frozen; no displayed row has results. Future rows within an LLM block must use the identical held-out IDs and report that common $N$; question counts must remain distinct from method inference records. The Oracle is excluded as non-deployable. Cost scope, price date, and latency protocol must be fixed before reporting.}
++\TableNote{Gemma 31B Always-A/B use the identical 150 frozen HotpotQA v1 held-out test IDs ($n=150$ per strategy), excluding calibration and validation. Latency is recorded client end-to-end time including retrieval and prompt processing; cost is not monetized. Other methods and LLM blocks remain pending. Phase~0 results are not changed. Oracle and held-out labels are never used for routing or calibration.}
+ \end{table}

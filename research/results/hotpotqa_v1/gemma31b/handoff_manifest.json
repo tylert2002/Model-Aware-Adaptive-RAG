@@ -1,0 +1,83 @@
+{
+  "experiment": "E1 Gemma 31B A/B; 450 validated records",
+  "branch": "tyler/gemma31b-formal-ab",
+  "excluded": "Credentials, snapshots, volumes, raw prompts/traces, runtime state/checkpoints, environments and caches",
+  "files": {
+    ".gitignore": {
+      "sha256": "2d7bec5812ed1cf849facd21680cb319113a5fe41ff2782c9b58580479f878ae",
+      "bytes": 1805
+    },
+    "research/reports/E1_gemma31b_AB_full_inference.md": {
+      "sha256": "f76a3cd1465c3a1a5d3c127e85e4c3f7814bf88246953962eac36e850558ce89",
+      "bytes": 18842
+    },
+    "research/experiments/formal/build_gemma31b_handoff.py": {
+      "sha256": "3be84fd753d79ad2b3f231def3ebcb4724c1d9811d4c1cc02a91d23ff8857077",
+      "bytes": 19638
+    },
+    "research/experiments/formal/evaluate_gemma31b_ab.py": {
+      "sha256": "fa69d226e3da11b386fac9db0a7fe2218fbccbe3cf17ee8120718f6fbb172c7d",
+      "bytes": 15771
+    },
+    "research/experiments/formal/gemma31b_ab.py": {
+      "sha256": "eb4b36d07288eb2aa6dea7eb5d504c72067f3c36f6fc9fa9dcf24acf50bf8c10",
+      "bytes": 18203
+    },
+    "research/experiments/formal/test_gemma31b_ab.py": {
+      "sha256": "e8b2687458ed966a581297a071782835083fcb5d26a9ef7e59c64047ae1b686d",
+      "bytes": 3468
+    },
+    "research/experiments/formal/validate_gemma31b_exports.py": {
+      "sha256": "c383b7f38196566806baa80b7f7e96129a0790e4ecef42c6a8167cb1e0fa587b",
+      "bytes": 5199
+    },
+    "research/results/hotpotqa_v1/gemma31b/calibration_AB.jsonl": {
+      "sha256": "5b280c2230e4070db031b4b44b044b6aae9bff02f440665b54d39f1870a50293",
+      "bytes": 137366
+    },
+    "research/results/hotpotqa_v1/gemma31b/validation_AB.jsonl": {
+      "sha256": "ae9447def0a20cf850bb85b7784a6b170c2682a7dd186dcd95a04c94911896a5",
+      "bytes": 67816
+    },
+    "research/results/hotpotqa_v1/gemma31b/test_AB.jsonl": {
+      "sha256": "1fc0069f85cd465093d9050bb2bbad98aa2b9ae8706f811ec3048545d27e3e22",
+      "bytes": 406564
+    },
+    "research/results/hotpotqa_v1/gemma31b/predictions_A.jsonl": {
+      "sha256": "79c828c318efb1cf0ce1ad3590720f3ebf63a6a9a3e996cc95ed1feded239cde",
+      "bytes": 238500
+    },
+    "research/results/hotpotqa_v1/gemma31b/predictions_B.jsonl": {
+      "sha256": "80501f90a556ad0b33cd142d609cbf48bc5bc41c98a083205d6589adf1eea402",
+      "bytes": 373246
+    },
+    "research/results/hotpotqa_v1/gemma31b/summary_metrics.json": {
+      "sha256": "d5a1a7ac28f64c07c4905859442c0af70243e4365f87562fe10f71e72162e239",
+      "bytes": 5686
+    },
+    "research/results/hotpotqa_v1/gemma31b/preflight.json": {
+      "sha256": "96a9e92aea8e55b8c8f0cacb3c802a97f8453a5d178ca1f28c8f77297eda369c",
+      "bytes": 14408
+    },
+    "research/results/hotpotqa_v1/gemma31b/execution_provenance.json": {
+      "sha256": "9fbdeba1ebed0c32e8bf68dff199d5daf84b9e483238f86c931e87dcad295d60",
+      "bytes": 1296
+    },
+    "research/results/hotpotqa_v1/gemma31b/validation_report.json": {
+      "sha256": "7f53818acab1117d1e4d2ee980a6ec95265efbbe522587a3c0e5c967823fbf2d",
+      "bytes": 1586
+    },
+    "research/results/hotpotqa_v1/gemma31b/compact_validation.json": {
+      "sha256": "c291a9796c37d99d342af1906495860f37896c511444e844c9fde151b48cffa2",
+      "bytes": 495
+    },
+    "research/results/hotpotqa_v1/gemma31b/raw_evidence_hashes.json": {
+      "sha256": "86dffc35733c5d126ec736341357522cb946a052b7aaa2319234b4221c153d76",
+      "bytes": 683362
+    },
+    "research/results/hotpotqa_v1/gemma31b/proposed_table_updates.patch": {
+      "sha256": "8c77f7d98e0497a4a35657fd1cad781f576bafa2881e53a8c52d741702153409",
+      "bytes": 2731
+    }
+  }
+}

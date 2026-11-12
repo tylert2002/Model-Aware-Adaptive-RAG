@@ -1,0 +1,239 @@
+{
+  "timestamp_utc": "2026-11-12T06:11:42.180989+00:00",
+  "branch": "tylertran",
+  "git_commit": "755ac6b49dc2d3c611438bbeec1663564764ac83",
+  "shared_main": "8d5009f9dbac38161f5605ac4b4e2f9d8deaf922",
+  "manifests": {
+    "calibration.jsonl": {
+      "sha256": "d387583b768319c91edb832502cfa78349a4957e6596c433b51d8c6179d59d9f",
+      "records": 50,
+      "matches_team_main": true
+    },
+    "inference/calibration.jsonl": {
+      "sha256": "0917e208cdaea7a429e3f922a12557c93982ccf1b1a1ab83f89df3ae67e9f585",
+      "records": 50,
+      "matches_team_main": true
+    },
+    "validation.jsonl": {
+      "sha256": "738d6508d57dae28179c039ae7611111ec27c01859ead046104bd7cad09b72d0",
+      "records": 25,
+      "matches_team_main": true
+    },
+    "inference/validation.jsonl": {
+      "sha256": "bcffb56de3a6b15eb0b138c0c007ce320334b0c1749c634e293058f1e8f5bbe1",
+      "records": 25,
+      "matches_team_main": true
+    },
+    "test.jsonl": {
+      "sha256": "be530a7228aa8e0964ed70b56d4752f20d63f93ad30f0db769ca7726fdc0d4c2",
+      "records": 150,
+      "matches_team_main": true
+    },
+    "inference/test.jsonl": {
+      "sha256": "39383a6c70643e2465a65eea19e96714c0695f5a0fe9e7d18e7a1262ddc12c1f",
+      "records": 150,
+      "matches_team_main": true
+    }
+  },
+  "unique_ids": 225,
+  "phase0_overlap": 0,
+  "protocol": {
+    "model_alias": "gemma",
+    "resolved_model_id": "google/gemma-4-31B-it-qat-w4a16-ct",
+    "decoding": {
+      "max_tokens": 300,
+      "temperature": 0,
+      "top_p": 1,
+      "stop": [
+        "\n"
+      ],
+      "enable_thinking": false
+    },
+    "strategy_config_sha256": {
+      "A": "a54a1117fae8a18e95ec40fa90184675e47df190cb3727df881cbb8b4fd341a6",
+      "B": "27b9132e6998c0321b54c51e923e9ea67f2a76c9d9927f1c35856b8a1bc4007d"
+    },
+    "prompt_sha256": {
+      "gold_with_1_distractors_context_cot_qa_codex.txt": "8e1fb865769cb42d5f54e6527590337df4195b95218dec8099b031d825e4b8fb",
+      "gold_with_1_distractors_context_cot_qa_flan_t5.txt": "04e6382f60c72e985cd0a790b1607a903b9485819e9525c12cfce9c3767f444c",
+      "gold_with_1_distractors_context_direct_qa_codex.txt": "e1798b18bd2cc23de8c1d28c7562567fdb23fe7a18924afbaaafefc8e366540c",
+      "gold_with_1_distractors_context_direct_qa_flan_t5.txt": "91e6e7bbe08e26aca5c3a442602cca0943f7dcde87d9ece5b167aa455f3f2ecd",
+      "gold_with_2_distractors_context_cot_qa_codex.txt": "742a41797f13a2d1f5efe9bee0293367fe179521aaec19adbaeb69f897303ca6",
+      "gold_with_2_distractors_context_cot_qa_flan_t5.txt": "fe9a0eb42658f2dec4ba38bfb931e3dde9d583d9015f9d7beb81514a3b3d2def",
+      "gold_with_2_distractors_context_direct_qa_codex.txt": "4e40909b336995ede754e16c4c10fdcd06ecad459354927351666916dfcd1917",
+      "gold_with_2_distractors_context_direct_qa_flan_t5.txt": "276a2ec1dfa8918d6a4060446c7f36241efb97fd526acb0ee84f39e662d43644",
+      "gold_with_3_distractors_context_cot_qa_codex.txt": "59ccc46b4be89b570be04a63df9c579fd38dab578c9c0d3816c44dd38d809067",
+      "gold_with_3_distractors_context_cot_qa_flan_t5.txt": "06101e408884b6f0f163e84bc2c6df51f0707806b8f6905bc9a8414dfdf73e6e",
+      "gold_with_3_distractors_context_direct_qa_codex.txt": "cb74e06f6599fd48a3831ee6234a30a4374c16f6c81a47cebe9cdee8d38ad1c3",
+      "gold_with_3_distractors_context_direct_qa_flan_t5.txt": "db2316cf50eb502cfc18549a72acbe41fa580c3f0ab66bb24cb1b929f6adaaa6",
+      "no_context_cot_qa_codex.txt": "d82cd3953d233f6b5059cbf425d90a3bce7fb4972ce64e7f26814227b240b1b5",
+      "no_context_cot_qa_flan_t5.txt": "108635bf19f442daeff92466f69d449e557d09daed4d950bdc5fb3fc20f09faf",
+      "no_context_direct_qa_codex.txt": "a132d7a49e889f07b33340f3f7c66b12c15157b1daa6b75c9895d625d826dd95",
+      "no_context_direct_qa_flan_t5.txt": "02e9f2d76069c5ba7c738e682b289e2449cf9cee93927f8dbbd6214f6bbfe89a"
+    },
+    "retriever_address_sha256": "2f1c2c65ab1486e991d911b7d789fdc7f05b30018d6627f239071086062b845b",
+    "implementation_sha256": {
+      "research/experiments/pilot/pipeline.py": "c44dc839b85f09ba5aa8b2fc56c861d0bbcd465a2c65833bd724e32934c97b2c",
+      "research/experiments/pilot/nrp_adapter.py": "976efb0645a8f4ba31f759fc0002386b78a6cbb58c142ae4e11ddec5fc892432",
+      "research/experiments/pilot/adaptive_rag_bridge.py": "355f932f7cb6b3040261de556eb8f1db3a63cf888ad40ae7c81aedd3c3e92353",
+      "research/experiments/pilot/inference_safe_reader.py": "4594a8233278efa2811d9876191dbc3279e52a4a4b34d0dbc3136dd599cc3230",
+      "adaptive-rag/commaqa/configs/README.md": "abce29bb4d26a4d56d68df3afbb73659b2c7ce442a9fbdea936015216a10428c",
+      "adaptive-rag/commaqa/configs/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "adaptive-rag/commaqa/configs/dataset_build_config.py": "3140134e69fa442b9cc05c394cbb2f63ae8477ddce2d24908be523b6fd4e8041",
+      "adaptive-rag/commaqa/configs/entities_config.py": "dfe325d7c5b0f8c4748e2093db0d47f20ffa464bacc9b07fd0637a445a08e1b6",
+      "adaptive-rag/commaqa/configs/predicate_config.py": "6557605a1e9c05a4e0b67f1c100a0f40ac5e6268acb4e5e95b4d4ea893ec9392",
+      "adaptive-rag/commaqa/configs/predicate_language_config.py": "64082e5e176c847e60a9f68e28f853af4be050564f72fdfd5559721d98d846a4",
+      "adaptive-rag/commaqa/configs/step_config.py": "0f36fffd2027def4b501151269f0478602ee38db3640fb2121ca69c1432c9fac",
+      "adaptive-rag/commaqa/configs/theory_config.py": "fbe4eb1b708a6895f0674947d5dd7c99ae133eedc844fc618edb927e5bee77ea",
+      "adaptive-rag/commaqa/configs/utils.py": "61bd4e0371a688263590eb8fe2c762c37198b7d86cd4a90c3f4af9b40481145d",
+      "adaptive-rag/commaqa/dataset/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "adaptive-rag/commaqa/dataset/build_dataset.py": "069a91fdd79b53e080af9dff07ba80abe0115587a59218c7235efda153db4f21",
+      "adaptive-rag/commaqa/dataset/build_submodel_datasets.py": "d36ddd7ad26463c6ec78d173f84311a284e1bf288803037bcf64ef16a75f747d",
+      "adaptive-rag/commaqa/dataset/generate_decomposition_predictions.py": "268f64dfb8a613377a96f802c80df9319346c08678192609eb502dbc15fa4b07",
+      "adaptive-rag/commaqa/dataset/generate_decompositions_from_chains.py": "b3fbc8dd0e1fbd5a7632e98d5a3d7732c979b85f7db45d9c7a51c066d37cc5db",
+      "adaptive-rag/commaqa/dataset/utils.py": "8f0241a7742db6303e6c40623a4bc2519e5d1e223d9f7e649679b79694a44a5a",
+      "adaptive-rag/commaqa/datasets_utils/build_letter_cat_dataset.py": "976359c6b0d25421ec659689b2cd31955ba9ccad4842606100fa6dc72f79aed7",
+      "adaptive-rag/commaqa/datasets_utils/build_reverse_dataset.py": "1ea7783139feec9c6c121af547c9471879f374336542a6ee362801d5900d4cf7",
+      "adaptive-rag/commaqa/datasets_utils/convert_gsm8k_to_drop.py": "d50abb7009999d67170f7049353ba2463814f20734a66da0bb257ddb0d9afc0d",
+      "adaptive-rag/commaqa/datasets_utils/drop_eval.py": "f602aa4294a641673c258ba0b05dc0407c6ddeaba16b584c97fd5550e9e9fa07",
+      "adaptive-rag/commaqa/datasets_utils/subselect_drop_dataset.py": "cc4fb2fad7d863be4832c6d231ddff9c9a28910cdc321da17c4d0a9daffc629d",
+      "adaptive-rag/commaqa/execution/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "adaptive-rag/commaqa/execution/constants.py": "02513d3ef1b450b63fdf9cb7c6437163a1cc971a0381cdcdde499d631f6cfcc7",
+      "adaptive-rag/commaqa/execution/kblookup.py": "7bf6e3154580f1fff9bc1ffc34ed4a19c4912b41e00210595c81f6e0fa876bbe",
+      "adaptive-rag/commaqa/execution/llm_qa_model.py": "f8934a71208f589ee8eb409b41a44d428c7006b17be12507e3d7b719563ef164",
+      "adaptive-rag/commaqa/execution/math_model.py": "076c1ed69c12e1cc4abf6811fa3dc8ab7e06f0e3c3a76a9f0102869d559813de",
+      "adaptive-rag/commaqa/execution/model_executer.py": "7706bb599f95541560738a6dd0cb17dbee5ed0fa13c123cf5dc300f228472228",
+      "adaptive-rag/commaqa/execution/operation_executer.py": "c045e00f5a992186f85be0ec6b1fbd651d9d9f1e89d7ce2a5193146b133c70df",
+      "adaptive-rag/commaqa/execution/utils.py": "dfaf3b0b17c7c7fbf74f45690a3e88caee8ee8c0ff946bc544bd7a4fe9789cef",
+      "adaptive-rag/commaqa/inference/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "adaptive-rag/commaqa/inference/configurable_inference.py": "2477d8030dd6ff2d51d9fd18d927896330f8e6026ecb99a12d59654252dd508d",
+      "adaptive-rag/commaqa/inference/constants.py": "8379cb1677a8532e132da6d9567b8adda5e658dad40241de51a51402ced758ad",
+      "adaptive-rag/commaqa/inference/data_instances.py": "9ab1b7313f1e6dfa3ec6ef47d72655eece8f6a1463adff76e0f1779d8a3024e5",
+      "adaptive-rag/commaqa/inference/dataset_readers.py": "d3f7d86eea0a59ec74fc5810df13877e91f71bb4269ad577d963f8e600fd4d44",
+      "adaptive-rag/commaqa/inference/ircot.py": "e7f7c69ed5e5e8dccb4fbe7985f781cef49e2fad51cc5df6046f33faa4913b3a",
+      "adaptive-rag/commaqa/inference/model_search.py": "26c686b7f68cfabee66bebfb02aacfdf1652cf8b7403ed4a0745e6a5f228f580",
+      "adaptive-rag/commaqa/inference/participant_execution.py": "a2d32d65f9d24c61eadae0697190a215ffaf9f2cf3029737ac94c1c8fe859030",
+      "adaptive-rag/commaqa/inference/participant_execution_routed.py": "d2c208061ca431326d8d2ce465d0bf3bc26e3a0b5cd0cf746eaf026345be0cae",
+      "adaptive-rag/commaqa/inference/participant_qa.py": "762276540baac890692aded107fce8c3bb099b9fb9cd8066a2d47a2933a80939",
+      "adaptive-rag/commaqa/inference/prompt_reader.py": "557fca4c8edf0fa197891e12ea991c1f9ae16f5ece2067ebae5d77bf4497bda4",
+      "adaptive-rag/commaqa/inference/utils.py": "c55cee0541699362f34f234d01b99bae7a391b7608c7de1ccfe5f3311495e3bd",
+      "adaptive-rag/commaqa/models/generator.py": "424f427fe41f3a1ea058fbea3463ea7eb761f9551f32fefdf65327e9ffdb6397",
+      "adaptive-rag/commaqa/models/gpt3generator.py": "0e1988f2b2d483d4a189f09e8957166609902a32d2801201609a878054be51e0",
+      "adaptive-rag/commaqa/models/llm_client_generator.py": "273386bcd7fade199a43fcd567f6388477064e85ad48bab10f718435e32d9655",
+      "adaptive-rag/metrics/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "adaptive-rag/metrics/answer_support_recall.py": "7eda4a09f381e06a8046018f40a9c7bfe6a5b6bf9bfa750f7adaeee3a7c44981",
+      "adaptive-rag/metrics/drop_answer_em_f1.py": "56d5fe81e99779af5fb8ff56e6758f3f53b531bf38c3516b9051be583b92d2d7",
+      "adaptive-rag/metrics/drop_eval.py": "5f78e9c5a902a4d065794c81b1d57775b61531b593ed6bb34200992b8fc48888",
+      "adaptive-rag/metrics/metric.py": "335866d123ac21416acdd1e5109ba02c1a3edcd1c8a0dd41e05f41427faa5e17",
+      "adaptive-rag/metrics/squad_answer_em_f1.py": "64b714fd3512de8bc0e00b61449106e68544453cc54c39660b79011649a4b92f",
+      "adaptive-rag/metrics/support_em_f1.py": "8ef898722b1c474f298ca2b7828a2b394455bfe5cf936d7c163e8d542b19daf6",
+      "adaptive-rag/retriever_server/build_index.py": "df1aab4b0f3008431db3c8c050375ae81a76a924b1a403de3dd3b190f764f734",
+      "adaptive-rag/retriever_server/elasticsearch_retriever.py": "43d47a65b30e9e784f0acaf3ad85d69e1e8d34770dfb29539009c5bde35746af",
+      "adaptive-rag/retriever_server/elasticsearch_server.py": "a4032346017fbfba765a90196d6a0a23e8347f8f4d77f0a24bd265db28318c59",
+      "adaptive-rag/retriever_server/interactive_query.py": "29e2da545cf31109f3284a4551ee0dad3c0146174753479b7d64b91a93bb9a48",
+      "adaptive-rag/retriever_server/requirements.txt": "199df8daf37347c0801d2f28af95d33d8e1fff44d3dbb6f85ca96611052a49c6",
+      "adaptive-rag/retriever_server/serve.py": "bcac56c4c332e17d4ab533bc7ae17de182c51856d347b87e9c918af2b85c6183",
+      "adaptive-rag/retriever_server/unified_retriever.py": "a8313f556c9bc61423365b5342bada1704320464ed6990d13db41087ed406c1f"
+    },
+    "prompt_fitting": {
+      "model_length_limit": 3500,
+      "reserved_tokens": 300,
+      "tokenizer": "gpt2",
+      "remove_method": "first",
+      "demonstration_delimiter": "\n\n\n"
+    },
+    "retrieval": {
+      "type": "bm25",
+      "depth": 5,
+      "corpus": "hotpotqa",
+      "query_source": "original_question",
+      "document_type": "title_paragraph_text",
+      "max_paragraphs": 15,
+      "max_paragraph_words": 350
+    }
+  },
+  "python": "3.9.6 (default, Apr 30 2025, 02:07:17) \n[Clang 17.0.0 (clang-1700.0.13.5)]",
+  "platform": "macOS-15.7.4-arm64-arm-64bit",
+  "dependencies": {
+    "jsonnet": "0.22.0",
+    "diskcache": "5.6.3",
+    "nltk": "3.9.2",
+    "transformers": "4.26.0.dev0",
+    "requests": "2.32.5",
+    "torch": "1.13.1",
+    "spacy": "3.4.1",
+    "openai": "1.5.0",
+    "elasticsearch": "7.9.1",
+    "fastapi": "0.103.2",
+    "uvicorn": "0.39.0",
+    "ftfy": "6.3.1",
+    "rapidfuzz": "3.13.0"
+  },
+  "elasticsearch": {
+    "endpoint": "http://127.0.0.1:9201",
+    "server": {
+      "name": "81662e01cbee",
+      "cluster_name": "docker-cluster",
+      "cluster_uuid": "Lf1Hssj9SBi06RqGPZ2PjA",
+      "version": {
+        "number": "7.10.2",
+        "build_flavor": "oss",
+        "build_type": "docker",
+        "build_hash": "747e1cc71def077253878a59143c1f785afa92b9",
+        "build_date": "2021-01-13T00:42:12.435326Z",
+        "build_snapshot": false,
+        "lucene_version": "8.7.0",
+        "minimum_wire_compatibility_version": "6.8.0",
+        "minimum_index_compatibility_version": "6.0.0-beta1"
+      },
+      "tagline": "You Know, for Search"
+    },
+    "count": {
+      "count": 5233329,
+      "_shards": {
+        "total": 1,
+        "successful": 1,
+        "skipped": 0,
+        "failed": 0
+      }
+    },
+    "health": {
+      "cluster_name": "docker-cluster",
+      "status": "yellow",
+      "timed_out": false,
+      "number_of_nodes": 1,
+      "number_of_data_nodes": 1,
+      "active_primary_shards": 1,
+      "active_shards": 1,
+      "relocating_shards": 0,
+      "initializing_shards": 0,
+      "unassigned_shards": 1,
+      "delayed_unassigned_shards": 0,
+      "number_of_pending_tasks": 0,
+      "number_of_in_flight_fetch": 0,
+      "task_max_waiting_in_queue_millis": 0,
+      "active_shards_percent_as_number": 50.0
+    }
+  },
+  "connectivity": {
+    "model": "google/gemma-4-31B-it-qat-w4a16-ct",
+    "text": "OK",
+    "status": "ok",
+    "latency_seconds": 0.6773650840000001,
+    "input_tokens": 17,
+    "output_tokens": 2,
+    "total_tokens": 19,
+    "finish_reason": "stop",
+    "request_id": "chatcmpl-1aa7c698-3cdd-956e-a108-5f2f91a2dbf1",
+    "attempts": 1
+  },
+  "adapter": {
+    "api_base": "https://ellm.nrp-nautilus.io/v1",
+    "timeout_seconds": 300.0,
+    "max_retries": 2,
+    "max_concurrency": 1,
+    "backoff_initial_seconds": 1.0,
+    "backoff_max_seconds": 16.0,
+    "cache_salt_sha256": null
+  }
+}
