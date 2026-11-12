@@ -1,0 +1,62 @@
+{
+  "experiment": "pilot_model_and_pipeline_validation",
+  "model_alias": "gemma",
+  "expected_resolved_model_id": "google/gemma-4-31B-it-qat-w4a16-ct",
+  "dataset": "hotpotqa",
+  "dataset_path": "research/data/splits/hotpotqa_v1/inference/calibration.jsonl",
+  "dataset_sha256": "0917e208cdaea7a429e3f922a12557c93982ccf1b1a1ab83f89df3ae67e9f585",
+  "input_schema": "inference_safe",
+  "selected_question_ids": [
+    "5a737e4655429908901be2cc",
+    "5a746a4455429974ef308bf6"
+  ],
+  "limit": 2,
+  "seed": 100,
+  "timestamp_utc": "2026-11-12T05:49:14.935095+00:00",
+  "git_commit": "f692efabd34d6bbcef24b62737c280951f219ef5",
+  "strategy_configs": {
+    "A": "adaptive-rag/base_configs/nor_qa_gpt_hotpotqa.jsonnet",
+    "B": "adaptive-rag/base_configs/oner_qa_gpt_hotpotqa.jsonnet"
+  },
+  "strategy_config_sha256": {
+    "A": "a54a1117fae8a18e95ec40fa90184675e47df190cb3727df881cbb8b4fd341a6",
+    "B": "27b9132e6998c0321b54c51e923e9ea67f2a76c9d9927f1c35856b8a1bc4007d"
+  },
+  "retriever_address_config": "adaptive-rag/.retriever_address.jsonnet",
+  "retriever_address_config_sha256": "2f1c2c65ab1486e991d911b7d789fdc7f05b30018d6627f239071086062b845b",
+  "retrieval_corpus": "hotpotqa",
+  "prompt_directory": "adaptive-rag/prompts/hotpotqa",
+  "prompt_file_sha256": {
+    "gold_with_1_distractors_context_cot_qa_codex.txt": "8e1fb865769cb42d5f54e6527590337df4195b95218dec8099b031d825e4b8fb",
+    "gold_with_1_distractors_context_cot_qa_flan_t5.txt": "04e6382f60c72e985cd0a790b1607a903b9485819e9525c12cfce9c3767f444c",
+    "gold_with_1_distractors_context_direct_qa_codex.txt": "e1798b18bd2cc23de8c1d28c7562567fdb23fe7a18924afbaaafefc8e366540c",
+    "gold_with_1_distractors_context_direct_qa_flan_t5.txt": "91e6e7bbe08e26aca5c3a442602cca0943f7dcde87d9ece5b167aa455f3f2ecd",
+    "gold_with_2_distractors_context_cot_qa_codex.txt": "742a41797f13a2d1f5efe9bee0293367fe179521aaec19adbaeb69f897303ca6",
+    "gold_with_2_distractors_context_cot_qa_flan_t5.txt": "fe9a0eb42658f2dec4ba38bfb931e3dde9d583d9015f9d7beb81514a3b3d2def",
+    "gold_with_2_distractors_context_direct_qa_codex.txt": "4e40909b336995ede754e16c4c10fdcd06ecad459354927351666916dfcd1917",
+    "gold_with_2_distractors_context_direct_qa_flan_t5.txt": "276a2ec1dfa8918d6a4060446c7f36241efb97fd526acb0ee84f39e662d43644",
+    "gold_with_3_distractors_context_cot_qa_codex.txt": "59ccc46b4be89b570be04a63df9c579fd38dab578c9c0d3816c44dd38d809067",
+    "gold_with_3_distractors_context_cot_qa_flan_t5.txt": "06101e408884b6f0f163e84bc2c6df51f0707806b8f6905bc9a8414dfdf73e6e",
+    "gold_with_3_distractors_context_direct_qa_codex.txt": "cb74e06f6599fd48a3831ee6234a30a4374c16f6c81a47cebe9cdee8d38ad1c3",
+    "gold_with_3_distractors_context_direct_qa_flan_t5.txt": "db2316cf50eb502cfc18549a72acbe41fa580c3f0ab66bb24cb1b929f6adaaa6",
+    "no_context_cot_qa_codex.txt": "d82cd3953d233f6b5059cbf425d90a3bce7fb4972ce64e7f26814227b240b1b5",
+    "no_context_cot_qa_flan_t5.txt": "108635bf19f442daeff92466f69d449e557d09daed4d950bdc5fb3fc20f09faf",
+    "no_context_direct_qa_codex.txt": "a132d7a49e889f07b33340f3f7c66b12c15157b1daa6b75c9895d625d826dd95",
+    "no_context_direct_qa_flan_t5.txt": "02e9f2d76069c5ba7c738e682b289e2449cf9cee93927f8dbbd6214f6bbfe89a"
+  },
+  "decoding": {
+    "max_tokens": 300,
+    "temperature": 0,
+    "top_p": 1,
+    "stop": [
+      "\\n"
+    ],
+    "enable_thinking": false
+  },
+  "adapter": {
+    "api_base": "https://ellm.nrp-nautilus.io/v1",
+    "timeout_seconds": 300.0,
+    "max_retries": 2,
+    "max_concurrency": 1
+  }
+}

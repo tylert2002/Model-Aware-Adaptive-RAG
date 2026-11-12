@@ -1,0 +1,28 @@
+{
+  "strategies": {
+    "A": {
+      "count": 2,
+      "em": 0.5,
+      "f1": 0.5,
+      "input_tokens": 2967,
+      "output_tokens": 137,
+      "api_latency_sum": 4.6619811669999995,
+      "end_to_end_latency_sum": 4.741815540999999
+    },
+    "B": {
+      "count": 2,
+      "em": 0.5,
+      "f1": 0.665,
+      "input_tokens": 6102,
+      "output_tokens": 150,
+      "api_latency_sum": 4.0052175420000005,
+      "end_to_end_latency_sum": 4.933113791000001
+    }
+  },
+  "valid_records": 4,
+  "attempts_per_request": 1,
+  "actual_stop": [
+    "\n"
+  ],
+  "note": "run_metadata.json inherits an upstream metadata escaping bug: its stop is printed as literal backslash-n; the generator sent a newline. No decoding change was made."
+}

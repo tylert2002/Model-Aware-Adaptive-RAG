@@ -1,0 +1,84 @@
+{
+  "artifact": "hotpotqa_elasticsearch_7.10.2_snapshot_20261110t0630z.tar.gz",
+  "artifact_size_bytes": 1942360297,
+  "artifact_sha256": "48ca9131be591611a725390ddcce7b83a0f3d62ddd17920675803c3cac9d5e54",
+  "archive_root": "hotpotqa_repository",
+  "elasticsearch": {
+    "version": "7.10.2",
+    "build_flavor": "oss",
+    "build_hash": "747e1cc71def077253878a59143c1f785afa92b9",
+    "source_image_digest": "sha256:fbd0d103d52b35df1cffeb8011f9006f51ee7a2447f062d6232c05dfa999fc3b",
+    "cluster_uuid": "m3ZE9uKqRM2MIn5MDOultw"
+  },
+  "source": {
+    "index": "hotpotqa",
+    "index_uuid": "8N5vCmxTSx6zcyJpkFlCgg",
+    "document_count": 5233329,
+    "deleted_document_count": 0,
+    "primary_store_size_bytes": 2343320530,
+    "primary_shards": 1,
+    "replica_shards": 1,
+    "docker_data_volume": "model-aware-pilot-es-data"
+  },
+  "snapshot": {
+    "repository_api_name": "hotpotqa_fs_repository",
+    "repository_directory": "hotpotqa_repository",
+    "name": "hotpotqa_20261110t0630z",
+    "uuid": "R2QTkNG9QzSD2cNiQjhpcA",
+    "state": "SUCCESS",
+    "version": "7.10.2",
+    "include_global_state": false,
+    "start_time": "2026-11-10T06:28:45.935Z",
+    "end_time": "2026-11-10T06:29:41.999Z",
+    "duration_millis": 56064,
+    "shards_total": 1,
+    "shards_successful": 1,
+    "shards_failed": 0,
+    "snapshot_file_count_reported_by_elasticsearch": 104,
+    "snapshot_size_bytes_reported_by_elasticsearch": 2343320530,
+    "failures": []
+  },
+  "expected_mapping": {
+    "id": "text with keyword subfield",
+    "is_abstract": "boolean",
+    "paragraph_index": "integer",
+    "paragraph_text": "text, english analyzer",
+    "title": "text, english analyzer",
+    "url": "text, english analyzer"
+  },
+  "known_sample_documents": [
+    {
+      "_id": "12001",
+      "title": "Luxembourg Football Federation",
+      "paragraph_index": 0,
+      "is_abstract": true
+    },
+    {
+      "_id": "12002",
+      "title": "US Lacrosse",
+      "paragraph_index": 0,
+      "is_abstract": true
+    }
+  ],
+  "known_sample_retrieval": {
+    "query": "multi_match: Luxembourg Football Federation over title^1.25 and paragraph_text, size 3",
+    "successful_shards": 1,
+    "top_hits": [
+      {
+        "_id": "4795782",
+        "title": "List of football clubs in Luxembourg",
+        "score": 24.022036
+      },
+      {
+        "_id": "12001",
+        "title": "Luxembourg Football Federation",
+        "score": 23.793234
+      },
+      {
+        "_id": "1247980",
+        "title": "List of Luxembourg international footballers",
+        "score": 23.246744
+      }
+    ]
+  }
+}

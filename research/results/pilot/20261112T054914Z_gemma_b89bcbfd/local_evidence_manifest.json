@@ -1,0 +1,61 @@
+{
+  "note": "Raw evidence is retained locally and intentionally excluded from Git. Hashes support comparison with the original saved files; no inference was rerun.",
+  "files": {
+    "results.jsonl": {
+      "bytes": 5006,
+      "sha256": "e3b2fb06a9788cfd6136f7666709b2abca87c7d8a18375338e959dc4d5f4af44"
+    },
+    "scored_results.jsonl": {
+      "bytes": 5477,
+      "sha256": "325e3ec5e592fd98147c9fa1e29d041344b2df0a536787e09c1630013c8cad0e"
+    },
+    "traces/5b13725ae8097cf3_A.jsonl": {
+      "bytes": 409,
+      "sha256": "1e81e0a975515474bbc1b36992fe087c71e44b180952348244ab119b5595c036"
+    },
+    "traces/5b13725ae8097cf3_A.prompt.txt": {
+      "bytes": 5496,
+      "sha256": "ae0bc6c5557d9397116d269d449884d7648265956b57db389ca9bb9a0eb64687"
+    },
+    "traces/5b13725ae8097cf3_A_retrieval.jsonl": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "traces/5b13725ae8097cf3_B.jsonl": {
+      "bytes": 427,
+      "sha256": "b6e70172d0191af61acda6efdad9b2d60d9bf6c7b81a4419fc13e9c2222d5b87"
+    },
+    "traces/5b13725ae8097cf3_B.prompt.txt": {
+      "bytes": 12518,
+      "sha256": "5c55cf0657aecf37578bd60e5f3ef62af360868555d5fd9439ec07b828d28f23"
+    },
+    "traces/5b13725ae8097cf3_B_retrieval.jsonl": {
+      "bytes": 2416,
+      "sha256": "ba154c06cf010510af219435f2125c764ab9a911418e8c27f250c1e65dc66892"
+    },
+    "traces/e846a94b7306d0f5_A.jsonl": {
+      "bytes": 668,
+      "sha256": "4c5835cfc635a3b82e9b22488b524da99c618814e3e2981c321d9b4c81704cd1"
+    },
+    "traces/e846a94b7306d0f5_A.prompt.txt": {
+      "bytes": 5522,
+      "sha256": "c010d3c91d1bb53d320b6cb9aff88c8fdd2d75ae3bdea6058f11671a983be0a5"
+    },
+    "traces/e846a94b7306d0f5_A_retrieval.jsonl": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "traces/e846a94b7306d0f5_B.jsonl": {
+      "bytes": 696,
+      "sha256": "8a67aa51b85fb74bfa86dc11258de1b5b94a925c466316a3a094b0c06db5403e"
+    },
+    "traces/e846a94b7306d0f5_B.prompt.txt": {
+      "bytes": 13496,
+      "sha256": "f393c02a1e4b0d4861b1d980da7ce361bcb742ee40fd8527b46c7a7080288aaf"
+    },
+    "traces/e846a94b7306d0f5_B_retrieval.jsonl": {
+      "bytes": 3393,
+      "sha256": "7057d66e728ee8079ff3fdf6d332ef9a5e85a72411fbc59d0c1977362aee856b"
+    }
+  }
+}

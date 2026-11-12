@@ -1,0 +1,22 @@
+{
+  "test": "connectivity only; not a HotpotQA pilot result",
+  "timestamp_utc": "2026-11-12T05:47:22.469338+00:00",
+  "model_alias": "gemma",
+  "api_base": "https://ellm.nrp-nautilus.io/v1",
+  "max_tokens": 16,
+  "temperature": 0,
+  "top_p": 1,
+  "enable_thinking": false,
+  "timeout_seconds": 300.0,
+  "max_retries": 2,
+  "model": "google/gemma-4-31B-it-qat-w4a16-ct",
+  "text": "OK",
+  "status": "ok",
+  "latency_seconds": 0.7285772500000001,
+  "input_tokens": 17,
+  "output_tokens": 2,
+  "total_tokens": 19,
+  "finish_reason": "stop",
+  "request_id": "chatcmpl-31c1af65-4dd5-9e6c-be0c-d980076cb3d3",
+  "attempts": 1
+}

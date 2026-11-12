@@ -1,0 +1,310 @@
+{
+  "server": {
+    "name": "81662e01cbee",
+    "cluster_name": "docker-cluster",
+    "cluster_uuid": "Lf1Hssj9SBi06RqGPZ2PjA",
+    "version": {
+      "number": "7.10.2",
+      "build_flavor": "oss",
+      "build_type": "docker",
+      "build_hash": "747e1cc71def077253878a59143c1f785afa92b9",
+      "build_date": "2021-01-13T00:42:12.435326Z",
+      "build_snapshot": false,
+      "lucene_version": "8.7.0",
+      "minimum_wire_compatibility_version": "6.8.0",
+      "minimum_index_compatibility_version": "6.0.0-beta1"
+    },
+    "tagline": "You Know, for Search"
+  },
+  "health": {
+    "cluster_name": "docker-cluster",
+    "status": "yellow",
+    "timed_out": false,
+    "number_of_nodes": 1,
+    "number_of_data_nodes": 1,
+    "active_primary_shards": 1,
+    "active_shards": 1,
+    "relocating_shards": 0,
+    "initializing_shards": 0,
+    "unassigned_shards": 1,
+    "delayed_unassigned_shards": 0,
+    "number_of_pending_tasks": 0,
+    "number_of_in_flight_fetch": 0,
+    "task_max_waiting_in_queue_millis": 0,
+    "active_shards_percent_as_number": 50.0
+  },
+  "count": {
+    "count": 5233329,
+    "_shards": {
+      "total": 1,
+      "successful": 1,
+      "skipped": 0,
+      "failed": 0
+    }
+  },
+  "mapping": {
+    "hotpotqa": {
+      "mappings": {
+        "properties": {
+          "id": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword",
+                "ignore_above": 256
+              }
+            }
+          },
+          "is_abstract": {
+            "type": "boolean"
+          },
+          "paragraph_index": {
+            "type": "integer"
+          },
+          "paragraph_text": {
+            "type": "text",
+            "analyzer": "english"
+          },
+          "title": {
+            "type": "text",
+            "analyzer": "english"
+          },
+          "url": {
+            "type": "text",
+            "analyzer": "english"
+          }
+        }
+      }
+    }
+  },
+  "settings": {
+    "hotpotqa": {
+      "settings": {
+        "index": {
+          "creation_date": "1793871608677",
+          "number_of_shards": "1",
+          "number_of_replicas": "1",
+          "uuid": "UxEda6-2SJWaj2ey6sI_wQ",
+          "version": {
+            "created": "7100299"
+          },
+          "provided_name": "hotpotqa"
+        }
+      }
+    }
+  },
+  "recovery": {
+    "hotpotqa": {
+      "shards": [
+        {
+          "id": 0,
+          "type": "SNAPSHOT",
+          "stage": "DONE",
+          "primary": true,
+          "start_time_in_millis": 1794457521449,
+          "stop_time_in_millis": 1794457577587,
+          "total_time_in_millis": 56126,
+          "source": {
+            "repository": "hotpotqa_fs_repository",
+            "snapshot": "hotpotqa_20261110t0630z",
+            "version": "7.10.2",
+            "index": "hotpotqa",
+            "restoreUUID": "6k-Ca1xKTr-o8IAxHc-GaA"
+          },
+          "target": {
+            "id": "q1B8k0xFTCGDnxjuR_WrjA",
+            "host": "172.17.0.2",
+            "transport_address": "172.17.0.2:9300",
+            "ip": "172.17.0.2",
+            "name": "81662e01cbee"
+          },
+          "index": {
+            "size": {
+              "total_in_bytes": 2343320530,
+              "reused_in_bytes": 0,
+              "recovered_in_bytes": 2343320530,
+              "percent": "100.0%"
+            },
+            "files": {
+              "total": 104,
+              "reused": 0,
+              "recovered": 104,
+              "percent": "100.0%"
+            },
+            "total_time_in_millis": 55945,
+            "source_throttle_time_in_millis": 0,
+            "target_throttle_time_in_millis": 0
+          },
+          "translog": {
+            "recovered": 0,
+            "total": 0,
+            "percent": "100.0%",
+            "total_on_start": 0,
+            "total_time_in_millis": 171
+          },
+          "verify_index": {
+            "check_index_time_in_millis": 0,
+            "total_time_in_millis": 0
+          }
+        }
+      ]
+    }
+  },
+  "uuid_comparison": {
+    "source": "8N5vCmxTSx6zcyJpkFlCgg",
+    "restored": "UxEda6-2SJWaj2ey6sI_wQ",
+    "matches": false
+  },
+  "samples": [
+    {
+      "_index": "hotpotqa",
+      "_type": "_doc",
+      "_id": "12001",
+      "_version": 1,
+      "_seq_no": 12000,
+      "_primary_term": 1,
+      "found": true,
+      "_source": {
+        "id": "4FQnxQP9koKD2ZhNvKKBUmL3jn7pVwWQ",
+        "title": "Luxembourg Football Federation",
+        "paragraph_index": 0,
+        "paragraph_text": "The Luxembourg Football Federation (FLF) (French: \"F\u00e9d\u00e9ration Luxembourgeoise de Football\" , German: \"Luxemburger Fu\u00dfballverband\" , Luxembourgish: \"L\u00ebtzebuerger Foussballfederatioun\" ) is the governing body of football in Luxembourg. It organises the Luxembourg Football League and the Luxembourg national football team. It is based in Mondercange, to the south of Luxembourg City.",
+        "url": "https://en.wikipedia.org/wiki?curid=694886",
+        "is_abstract": true
+      }
+    },
+    {
+      "_index": "hotpotqa",
+      "_type": "_doc",
+      "_id": "12002",
+      "_version": 1,
+      "_seq_no": 12001,
+      "_primary_term": 1,
+      "found": true,
+      "_source": {
+        "id": "pVrjipVgwZ73fQCfBdGeFrejyy3LDyVm",
+        "title": "US Lacrosse",
+        "paragraph_index": 0,
+        "paragraph_text": "US Lacrosse is the national governing body of men and women's lacrosse in the United States, primarily serving the youth game. It provides a leadership role in virtually every aspect of the game, boasts 68 chapters and more than 450,000 members throughout the United States, and offers programs and services to inspire participation while protecting the integrity of the sport. The US Lacrosse national headquarters is located in Sparks, Md., along with the Lacrosse Museum and National Hall of Fame. In addition, the headquarters campus features the IWLCA Building, Tierney Field and a memorial to the members of the lacrosse community that died in the September 11, 2001 terrorist attacks. US Lacrosse also oversees the U.S. National Teams, which have won a combined 28 world championships.",
+        "url": "https://en.wikipedia.org/wiki?curid=694893",
+        "is_abstract": true
+      }
+    }
+  ],
+  "bm25": {
+    "took": 119,
+    "timed_out": false,
+    "_shards": {
+      "total": 1,
+      "successful": 1,
+      "skipped": 0,
+      "failed": 0
+    },
+    "hits": {
+      "total": {
+        "value": 10000,
+        "relation": "gte"
+      },
+      "max_score": 24.022036,
+      "hits": [
+        {
+          "_index": "hotpotqa",
+          "_type": "_doc",
+          "_id": "4795782",
+          "_score": 24.022036,
+          "_source": {
+            "id": "2WFVEhhzaAX3CrenmXX41bhcDBBAV46y",
+            "title": "List of football clubs in Luxembourg",
+            "paragraph_index": 0,
+            "paragraph_text": "This is a complete list of football clubs in Luxembourg affiliated to the Luxembourg Football Federation, the governing body for football in Luxembourg.",
+            "url": "https://en.wikipedia.org/wiki?curid=11732149",
+            "is_abstract": true
+          }
+        },
+        {
+          "_index": "hotpotqa",
+          "_type": "_doc",
+          "_id": "12001",
+          "_score": 23.793234,
+          "_source": {
+            "id": "4FQnxQP9koKD2ZhNvKKBUmL3jn7pVwWQ",
+            "title": "Luxembourg Football Federation",
+            "paragraph_index": 0,
+            "paragraph_text": "The Luxembourg Football Federation (FLF) (French: \"F\u00e9d\u00e9ration Luxembourgeoise de Football\" , German: \"Luxemburger Fu\u00dfballverband\" , Luxembourgish: \"L\u00ebtzebuerger Foussballfederatioun\" ) is the governing body of football in Luxembourg. It organises the Luxembourg Football League and the Luxembourg national football team. It is based in Mondercange, to the south of Luxembourg City.",
+            "url": "https://en.wikipedia.org/wiki?curid=694886",
+            "is_abstract": true
+          }
+        },
+        {
+          "_index": "hotpotqa",
+          "_type": "_doc",
+          "_id": "1247980",
+          "_score": 23.246744,
+          "_source": {
+            "id": "5YhAdZiMHD6n96bbLrAyhRzoENjRtMWd",
+            "title": "List of Luxembourg international footballers",
+            "paragraph_index": 0,
+            "paragraph_text": "The Luxembourg national football team represents the nation of Luxembourg in international association football. It is controlled by the Luxembourg Football Federation, the governing body of football in Luxembourg, and competes as a member of UEFA.",
+            "url": "https://en.wikipedia.org/wiki?curid=36891371",
+            "is_abstract": true
+          }
+        }
+      ]
+    }
+  },
+  "retriever": {
+    "retrieval": [
+      {
+        "paragraph_text": "The Luxembourg Football Federation (FLF) (French: \"F\u00e9d\u00e9ration Luxembourgeoise de Football\" , German: \"Luxemburger Fu\u00dfballverband\" , Luxembourgish: \"L\u00ebtzebuerger Foussballfederatioun\" ) is the governing body of football in Luxembourg. It organises the Luxembourg Football League and the Luxembourg national football team. It is based in Mondercange, to the south of Luxembourg City.",
+        "id": "4FQnxQP9koKD2ZhNvKKBUmL3jn7pVwWQ",
+        "paragraph_index": 0,
+        "title": "Luxembourg Football Federation",
+        "is_abstract": true,
+        "url": "https://en.wikipedia.org/wiki?curid=694886",
+        "score": 41.240738,
+        "corpus_name": "hotpotqa"
+      },
+      {
+        "paragraph_text": "This is a complete list of football clubs in Luxembourg affiliated to the Luxembourg Football Federation, the governing body for football in Luxembourg.",
+        "id": "2WFVEhhzaAX3CrenmXX41bhcDBBAV46y",
+        "paragraph_index": 0,
+        "title": "List of football clubs in Luxembourg",
+        "is_abstract": true,
+        "url": "https://en.wikipedia.org/wiki?curid=11732149",
+        "score": 35.046562,
+        "corpus_name": "hotpotqa"
+      },
+      {
+        "paragraph_text": "Football is the most popular sport in Luxembourg. Football in Luxembourg is governed by the Luxembourg Football Federation (FLF), which is a member of FIFA and UEFA. The FLF organises the men's, women's and futsal national teams, in addition to the main domestic competitions, the National Division and the Luxembourg Cup. Despite football being so popular, Luxembourg has rarely had a club pass the second round of qualifying for the Champions League.",
+        "id": "5Xsm2WJBLgxUqJiBEiVApXcYv9wtgR7s",
+        "paragraph_index": 0,
+        "title": "Football in Luxembourg",
+        "is_abstract": true,
+        "url": "https://en.wikipedia.org/wiki?curid=8605136",
+        "score": 34.85343,
+        "corpus_name": "hotpotqa"
+      },
+      {
+        "paragraph_text": "The Luxembourg national football team represents the nation of Luxembourg in international association football. It is controlled by the Luxembourg Football Federation, the governing body of football in Luxembourg, and competes as a member of UEFA.",
+        "id": "5YhAdZiMHD6n96bbLrAyhRzoENjRtMWd",
+        "paragraph_index": 0,
+        "title": "List of Luxembourg international footballers",
+        "is_abstract": true,
+        "url": "https://en.wikipedia.org/wiki?curid=36891371",
+        "score": 34.27127,
+        "corpus_name": "hotpotqa"
+      },
+      {
+        "paragraph_text": "Luxembourg Cricket Federation is the official governing body of the sport of cricket in Luxembourg. Luxembourg Cricket Federation is Luxembourg's representative at the International Cricket Council and is an affiliate member and has been a member of that body since 1998. It is responsible for selection and organisation of the Luxembourg national cricket team as well as organising and running the domestic cricket league.",
+        "id": "2zvPi3BAyCvEtjcNLb2y3Au6JfsxQH9C",
+        "paragraph_index": 0,
+        "title": "Luxembourg Cricket Federation",
+        "is_abstract": true,
+        "url": "https://en.wikipedia.org/wiki?curid=16492801",
+        "score": 32.970806,
+        "corpus_name": "hotpotqa"
+      }
+    ],
+    "time_in_seconds": 0.2
+  }
+}

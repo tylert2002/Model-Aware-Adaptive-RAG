@@ -61,3 +61,11 @@ research/paper/*.run.xml
 research/paper/*.synctex.gz
 research/paper/*.toc
 research/paper/*.pdf
+
+# Gemma 31B local credentials, snapshot delivery, and raw pilot evidence
+/env.example
+/research/results/pilot/*.tar.gz
+/research/results/pilot/20261112T054852Z_gemma_4a4be204/
+/research/results/pilot/20261112T054914Z_gemma_b89bcbfd/traces/
+/research/results/pilot/20261112T054914Z_gemma_b89bcbfd/results.jsonl
+/research/results/pilot/20261112T054914Z_gemma_b89bcbfd/scored_results.jsonl
